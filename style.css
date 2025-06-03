@@ -13,30 +13,55 @@
     --nav-bg-color: rgba(34, 34, 34, 0.85); /* Fundo da nav mais opaco */
     --nav-link-color: rgba(255, 255, 255, 0.7); /* Cor dos links da nav */
     --nav-link-hover-color: #ffffff; /* Cor dos links da nav no hover */
+    --bg-primary: #1a1a1a; /* Cor de fundo principal escura para a splash screen */
 
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Open Sans', sans-serif;
 
     --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
     --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
-    --shadow-strong: 0 12px 35px rgba(0, 0, 0, 0.2);
+    --shadow-strong: 0 12px 35px rgba(0, 0, 0, 0.2); /* Ajustado para 0.2 */
 }
 
-/* --- Estilos Globais e Reset --- */
+/* --- Estilos Globais e Reset Básico --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-body);
-    color: var(--text-dark);
-    margin: 0;
     line-height: 1.6;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    overflow-x: hidden; /* Garante que não haja barra de rolagem horizontal */
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    color: var(--text-dark);
-    margin-bottom: 0.5em;
-    line-height: 1.2;
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-hover-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* --- Overlay de Carregamento --- */
@@ -46,28 +71,26 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-primary); /* Mesma cor da splash screen */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 1000; /* Acima de tudo */
     opacity: 1;
-    visibility: visible;
-    transition: opacity 1s ease-out, visibility 1s ease-out;
+    transition: opacity 0.5s ease-out;
 }
 
 .loading-overlay.fade-out {
     opacity: 0;
-    visibility: hidden;
 }
 
 .spinner {
-    border: 8px solid rgba(255, 255, 255, 0.3);
-    border-top: 8px solid var(--accent-color);
+    border: 8px solid rgba(255, 255, 255, 0.3); /* Ajustado para 8px */
+    border-top: 8px solid var(--accent-color); /* Ajustado para 8px */
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1.5s linear infinite;
+    width: 60px; /* Ajustado */
+    height: 60px; /* Ajustado */
+    animation: spin 1.5s linear infinite; /* Ajustado para 1.5s */
 }
 
 @keyframes spin {
@@ -75,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
     100% { transform: rotate(360deg); }
 }
 
-/* --- SPLASH SCREEN (NOVA SEÇÃO HERO) --- */
+/* --- Splash Screen --- */
 .splash-screen-section {
     position: fixed; /* Fixa na tela */
     top: 0;
@@ -93,14 +116,15 @@ h1, h2, h3, h4, h5, h6 {
     /* Transição mais rápida e com um 'ease-in-out' para suavidade */
     transition: opacity 2s ease-in-out, transform 2s ease-in-out, filter 2s ease-in-out, visibility 2s ease-in-out;
 
-    /* Estado inicial para o zoom-in */
+    /* Estado inicial para o zoom-in (usado pelo JS para transição) */
     transform: scale(1);
     filter: blur(0px);
     opacity: 1;
     visibility: visible;
 }
 
-/* Nova classe para a animação de saída da splash screen: zoom IN e blur OUT */
+/* NOVO: Classe para a animação de saída da splash screen: zoom IN e blur OUT */
+/* Essa classe será adicionada pelo JavaScript */
 .splash-screen-section.zoom-in-blur-out {
     opacity: 0; /* Desaparece */
     transform: scale(1.1); /* Ajustado para um zoom mais suave para DENTRO */
@@ -118,40 +142,55 @@ h1, h2, h3, h4, h5, h6 {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
-    filter: brightness(0.4); /* Escurece a imagem */
+    filter: brightness(0.4); /* Escurece a imagem para 40% de brilho */
+}
+
+.darken-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Começa transparente */
+    z-index: 0; /* Entre o BG e o conteúdo */
+    transition: background-color 0.8s ease-in-out; /* Transição para o escurecimento */
+}
+
+.darken-overlay.active-darken {
+    background-color: rgba(0, 0, 0, 1); /* Fica preto opaco */
 }
 
 .splash-screen-content {
     position: relative;
     z-index: 1;
-    max-width: 900px;
+    max-width: 900px; /* Adicionado para controlar a largura máxima */
     padding: 0 1.5rem;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    margin-top: -80px; /* Ajusta a posição vertical da citação e autor */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+    margin-top: -80px; /* Ajusta a posição vertical */
 }
 
 .hero-quote {
     font-family: var(--font-heading);
-    font-size: 3.8rem;
-    font-weight: 500;
+    font-size: 3.8rem; /* Ajustado para a imagem de referência */
+    font-weight: 500; /* Ajustado */
     line-height: 1.3;
-    margin-bottom: 1.5rem;
-    color: white;
-    animation: fadeInDown 1.2s ease-out;
+    margin-bottom: 1.5rem; /* Ajustado */
+    color: white; /* Cor da fonte */
+    animation: fadeInDown 1.2s ease-out; /* Adicionado a animação inicial */
 }
 
 .hero-author {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-family: var(--font-heading); /* Alterado para font-heading como na ref. */
+    font-size: 1.8rem; /* Ajustado para a imagem de referência */
     font-weight: 400;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 3rem; /* Aumenta o espaçamento abaixo do autor para o botão */
-    animation: fadeInUp 1.2s ease-out 0.3s forwards;
-    opacity: 0;
+    margin-bottom: 3rem; /* Aumentado espaçamento */
+    animation: fadeInUp 1.2s ease-out 0.3s forwards; /* Adicionado a animação inicial */
+    opacity: 0; /* Inicia invisível para a animação */
 }
 
 /* ESTILO DO BOTÃO "Descobrir o Site" */
-.discover-button {
+.discover-button { /* Usando a classe que foi adicionada no HTML */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -159,17 +198,17 @@ h1, h2, h3, h4, h5, h6 {
     box-sizing: border-box;
     background-color: transparent;
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda semitransparente */
+    padding: 0.8rem 2rem; /* Ajustado */
+    border-radius: 50px; /* Borda mais arredondada */
     font-size: 1rem;
     font-weight: 400;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: none;
-    animation: zoomIn 1s ease-out 0.6s forwards;
-    opacity: 0;
-    margin-top: 1rem;
+    box-shadow: none; /* Removido a sombra */
+    animation: zoomIn 1s ease-out 0.6s forwards; /* Animação inicial */
+    opacity: 0; /* Inicia invisível para a animação */
+    margin-top: 1rem; /* Adicionado espaçamento superior */
 }
 
 .discover-button:hover {
@@ -183,7 +222,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.9rem;
 }
 
-/* --- Animações --- */
+/* --- Novas Animações (Adicione estas se ainda não as tiver) --- */
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-50px); }
     to { opacity: 1; transform: translateY(0); }
@@ -199,154 +238,11 @@ h1, h2, h3, h4, h5, h6 {
     to { opacity: 1; transform: scale(1); }
 }
 
-
-/* --- Barra de Navegação Principal (Redesign) --- */
-.main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background-color: var(--nav-bg-color);
-    color: var(--text-light);
-    z-index: 1000;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.main-nav .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
-.nav-brand {
-    font-family: var(--font-heading);
-    font-size: 1.9rem;
-    font-weight: 500;
-    color: var(--nav-link-hover-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.nav-brand:hover {
-    color: var(--accent-color);
-}
-
-.nav-links {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-item {
-    color: var(--nav-link-color);
-    text-decoration: none;
-    font-size: 1.05rem;
-    font-weight: 400;
-    padding: 0.5rem 0;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.nav-item::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 100%;
-    height: 2px;
-    background-color: var(--accent-color);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.nav-item:hover::after,
-.nav-item.active::after {
-    transform: scaleX(1);
-}
-
-.nav-item.active {
-    color: var(--nav-link-hover-color);
-}
-
-.nav-search-icon {
-    font-size: 1.2rem;
-    margin-left: 0.5rem;
-    color: var(--nav-link-color);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.nav-search-icon:hover {
-    color: var(--nav-link-hover-color);
-}
-
-/* Mobile Menu */
-.mobile-menu-toggle {
-    display: none;
-    font-size: 1.8rem;
-    background: none;
-    border: none;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.mobile-menu-toggle:hover {
-    color: var(--accent-color);
-}
-
-.mobile-menu-dropdown {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: var(--nav-bg-color);
-    padding: 1rem 0;
-    box-shadow: var(--shadow-medium);
-    z-index: 999;
-}
-
-.mobile-menu-dropdown.show {
-    display: flex;
-}
-
-.mobile-nav-item {
-    color: var(--nav-link-color);
-    text-decoration: none;
-    padding: 0.8rem 1.5rem;
-    font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.mobile-nav-item:last-child {
-    border-bottom: none;
-}
-
-.mobile-nav-item:hover,
-.mobile-nav-item.active {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--accent-color);
-}
-
-/* --- Conteúdo Principal do Site (Inicialmente Oculto) --- */
+/* --- Conteúdo Principal do Site (site-content) --- */
 .site-content {
-    min-height: calc(100vh - 70px);
-    padding-top: 70px;
-    background-color: white;
+    min-height: calc(100vh - 70px); /* Ajustado para considerar a navbar */
+    padding-top: 70px; /* Espaçamento para a navbar fixa */
+    background-color: white; /* Cor de fundo branca */
     /* Sincroniza a duração com a splash screen */
     transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out, filter 1.5s ease-in-out, visibility 1.5s ease-in-out;
     /* Inicia com um zoom reverso mais sutil e desfoque para a transição fluida */
@@ -357,7 +253,6 @@ h1, h2, h3, h4, h5, h6 {
     overflow-x: hidden; /* Garante que não haja barra de rolagem horizontal durante a transição */
 }
 
-/* Classe para mostrar o conteúdo do site */
 .site-content.show-content {
     opacity: 1;
     visibility: visible;
@@ -365,253 +260,352 @@ h1, h2, h3, h4, h5, h6 {
     filter: blur(0); /* Remove o desfoque */
 }
 
-.content-section {
-    padding: 6rem 0;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+/* --- Navbar --- */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg-color);
+    padding: 15px 0;
+    box-shadow: var(--shadow-light);
+    z-index: 500; /* Abaixo da splash screen, mas acima do conteúdo */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transição para aparecer */
 }
-.content-section:last-child {
+
+.main-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza os itens da navbar */
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--text-light);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin-left: auto; /* Empurra os links para a direita */
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-item {
+    font-family: var(--font-body);
+    color: var(--nav-link-color);
+    font-weight: 600;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    padding-bottom: 5px; /* Espaço para a borda */
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--nav-link-hover-color);
+    border-bottom: 2px solid var(--accent-color); /* Adiciona um sublinhado */
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none; /* Escondido por padrão em desktop */
+    font-size: 1.8em;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.mobile-menu-dropdown {
+    list-style: none;
+    background-color: var(--nav-bg-color);
+    position: fixed;
+    top: 60px; /* Altura da navbar */
+    left: 0;
+    width: 100%;
+    max-height: 0; /* Começa escondido */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    box-shadow: var(--shadow-light);
+    z-index: 499; /* Abaixo da navbar */
+}
+
+.mobile-menu-dropdown.show {
+    max-height: 300px; /* Altura suficiente para mostrar os itens */
+}
+
+.mobile-menu-dropdown li {
+    text-align: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-dropdown li:last-child {
     border-bottom: none;
 }
 
+.mobile-nav-item {
+    font-family: var(--font-body);
+    color: var(--nav-link-color);
+    font-weight: 600;
+    display: block; /* Para ocupar toda a largura do li */
+    padding: 10px 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--nav-link-hover-color);
+}
+
+/* --- Seções de Conteúdo --- */
+.content-section {
+    padding: 80px 0;
+    opacity: 0; /* Inicia invisível */
+    transform: translateY(20px); /* Começa ligeiramente abaixo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.content-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title {
-    font-size: 3rem;
+    font-family: var(--font-heading);
+    font-size: 3em;
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
+    color: var(--primary-color);
+    margin-bottom: 10px;
     position: relative;
-    display: inline-block;
+    display: inline-block; /* Para o sublinhado */
 }
 
 .section-title::after {
     content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: 100%;
+    display: block;
+    width: 60px;
     height: 4px;
     background-color: var(--accent-color);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.content-section.in-view .section-title::after {
-    transform: scaleX(1);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 .section-subtitle {
-    font-size: 1.25rem;
-    font-weight: 300;
-    color: #666;
-    margin-bottom: 3rem;
+    font-family: var(--font-body);
+    font-size: 1.2em;
+    color: var(--secondary-accent-color);
+    margin-bottom: 50px;
 }
 
-/* Seção Sobre Diogo (Redesign) */
-.about-section {
-    background-color: white;
-    padding: 8rem 0;
+/* --- Seção "Sobre Diogo" --- */
+.about-me-section {
+    background-color: var(--bg-light);
 }
 
 .about-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
     align-items: center;
-    gap: 4rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    text-align: left;
 }
 
 .about-image-container {
-    position: relative;
     width: 300px;
     height: 300px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: var(--shadow-strong);
-    border: 8px solid var(--accent-color);
-    flex-shrink: 0;
-    transform: scale(0.8);
-    opacity: 0;
-    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s ease-out;
-}
-
-.content-section.in-view .about-image-container {
-    transform: scale(1);
-    opacity: 1;
+    margin: 0 auto;
+    box-shadow: var(--shadow-medium);
 }
 
 .about-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(0%);
-    transition: filter 0.5s ease;
-}
-
-.about-image:hover {
-    filter: grayscale(80%);
-}
-
-.about-text {
-    text-align: left;
-    max-width: 600px;
 }
 
 .about-text p {
-    margin-bottom: 1.2rem;
-    font-size: 1.15rem;
-    color: #333;
-    line-height: 1.7;
-    transform: translateY(30px);
-    opacity: 0;
-    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    line-height: 1.8;
 }
 
-.content-section.in-view .about-text p:nth-child(1) { transition-delay: 0.3s; transform: translateY(0); opacity: 1; }
-.content-section.in-view .about-text p:nth-child(2) { transition-delay: 0.5s; transform: translateY(0); opacity: 1; }
-.content-section.in-view .about-text p:nth-child(3) { transition-delay: 0.7s; transform: translateY(0); opacity: 1; }
-
-
-/* Seção de Serviços */
+/* --- Seção "Serviços" --- */
 .services-section {
-    background-color: var(--bg-light);
+    background-color: #f0f0f0; /* Um fundo ligeiramente diferente */
 }
 
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: 30px;
 }
 
 .service-card {
-    background-color: white;
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-light);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    transform: translateY(30px);
-    opacity: 0;
 }
 
 .service-card:hover {
-    transform: translateY(-12px);
+    transform: translateY(-10px);
     box-shadow: var(--shadow-strong);
 }
 
-.content-section.in-view .service-card:nth-child(1) { transition-delay: 0.2s; transform: translateY(0); opacity: 1; }
-.content-section.in-view .service-card:nth-child(2) { transition-delay: 0.4s; transform: translateY(0); opacity: 1; }
-.content-section.in-view .service-card:nth-child(3) { transition-delay: 0.6s; transform: translateY(0); opacity: 1; }
-
-
 .service-icon {
-    font-size: 4rem;
+    font-size: 4em;
     color: var(--accent-color);
-    margin-bottom: 1.2rem;
-    display: block;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
-.card-title {
-    font-size: 1.85rem;
-    font-weight: 600;
-    margin-bottom: 0.8rem;
+.service-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    margin-bottom: 15px;
     color: var(--primary-color);
 }
 
-.card-description {
-    font-size: 1.05rem;
-    color: #555;
+.service-card p {
+    font-size: 1em;
+    color: var(--secondary-accent-color);
 }
 
-/* Seção de Contato */
+/* --- Seção "Portfólio" --- */
+.portfolio-section {
+    background-color: var(--bg-light);
+}
+
+.portfolio-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 250px; /* Altura fixa para uniformidade */
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    transform: scale(1.05);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--text-light);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    transform: translateY(0);
+}
+
+.portfolio-overlay h4 {
+    font-family: var(--font-heading);
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.portfolio-overlay p {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Seção "Contato" --- */
 .contact-section {
-    background-color: white;
+    background-color: #f0f0f0;
+}
+
+.contact-info {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1em;
 }
 
 .contact-info p {
-    font-size: 1.15rem;
-    margin-bottom: 0.8rem;
-    color: #444;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.icon-small {
-    font-size: 1.25rem;
+.contact-info .icon-small {
+    font-size: 1.2em;
+    margin-right: 10px;
     color: var(--accent-color);
-    margin-right: 0.5rem;
 }
 
 .social-links {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.8rem;
+    margin-top: 30px;
 }
 
 .social-icon {
-    font-size: 2.4rem;
+    display: inline-block;
+    font-size: 2em;
     color: var(--primary-color);
+    margin: 0 15px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icon:hover {
     color: var(--accent-color);
-    transform: translateY(-8px);
+    transform: translateY(-5px);
 }
 
 /* --- Rodapé --- */
 .footer {
     background-color: var(--bg-dark);
     color: var(--text-light);
-    padding: 2rem 1.5rem;
-    font-size: 0.9rem;
-    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9em;
 }
 
-/* --- Responsividade --- */
-@media (min-width: 769px) {
-    /* Layout lado a lado para "Sobre Diogo" em telas maiores */
-    .about-grid {
-        flex-direction: row;
-        text-align: left;
-    }
-
-    .about-image-container {
-        margin: 0;
-    }
-}
-
-
-@media (max-width: 768px) {
+/* --- Media Queries para Responsividade --- */
+@media (max-width: 992px) {
     .hero-quote {
-        font-size: 2.8rem;
+        font-size: 2.8rem; /* Ajustado para a imagem de referência */
     }
     .hero-author {
-        font-size: 1.6rem;
+        font-size: 1.6rem; /* Ajustado para a imagem de referência */
     }
     .discover-button {
-        padding: 0.7rem 1.8rem;
-        font-size: 1rem;
+        padding: 0.7rem 1.8rem; /* Ajustado para a imagem de referência */
+        font-size: 1rem; /* Ajustado para a imagem de referência */
     }
-    /* Navbar Mobile */
     .nav-links {
-        display: none;
-    }
-    .mobile-menu-toggle {
-        display: block;
+        margin-left: 0; /* Remove o margin-left */
     }
     .main-nav .container {
-        justify-content: space-between;
+        justify-content: space-between; /* Ajusta o alinhamento para mobile */
     }
     .section-title {
         font-size: 2.5rem;
@@ -641,35 +635,53 @@ h1, h2, h3, h4, h5, h6 {
     .service-icon {
         font-size: 3.5rem;
     }
-    .card-title {
-        font-size: 1.6rem;
+    .portfolio-gallery {
+        grid-template-columns: 1fr;
+    }
+    .portfolio-item {
+        margin-bottom: 20px;
+    }
+    .contact-info p {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-info .icon-small {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-quote {
+        font-size: 2.5rem; /* Ajustado para a imagem de referência */
+    }
+    .hero-author {
+        font-size: 1.4rem; /* Ajustado para a imagem de referência */
+    }
+    .discover-button {
+        padding: 0.6rem 1.5rem; /* Ajustado para a imagem de referência */
+        font-size: 0.9rem; /* Ajustado para a imagem de referência */
+    }
+    /* Navbar Mobile */
+    .nav-links {
+        display: none;
+    }
+    .mobile-menu-toggle {
+        display: block;
+    }
+    .main-nav .container {
+        justify-content: space-between;
     }
 }
 
 @media (max-width: 480px) {
     .hero-quote {
-        font-size: 2.2rem;
+        font-size: 2rem; /* Ajustado para a imagem de referência */
     }
     .hero-author {
-        font-size: 1.3rem;
+        font-size: 1.2rem; /* Ajustado para a imagem de referência */
     }
-    .discover-button {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    .section-title {
-        font-size: 2rem;
-    }
-    .service-card {
-        padding: 1.8rem;
-    }
-    .service-icon {
-        font-size: 3rem;
-    }
-    .card-title {
-        font-size: 1.4rem;
-    }
-    .social-icon {
-        font-size: 2rem;
+    .splash-screen-content {
+        padding: 15px;
     }
 }
