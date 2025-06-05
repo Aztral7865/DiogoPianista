@@ -33,23 +33,27 @@ body {
     background-color: var(--cor-fundo-principal);
     color: var(--cor-texto-principal);
     font-family: 'Poppins', sans-serif;
-    /* Aplicando Poppins globalmente */
     line-height: 1.7;
-    /* Melhor legibilidade */
     font-weight: 400;
-    /* Peso padrão */
+    overflow-x: hidden;
+    /* Prevenir scroll horizontal caso algo exceda */
 }
 
 .container {
     width: 90%;
     max-width: 1100px;
-    /* Um pouco mais largo para layouts modernos */
     margin: 0 auto;
 }
 
 .section-padding {
-    padding: 70px 0;
-    /* Mais espaçamento vertical */
+    /*
+     * Define o espaçamento interno para as seções principais.
+     * O padding-top foi aumentado para 85px para garantir que o conteúdo da seção
+     * não seja sobreposto pelo cabeçalho fixo.
+     * O padding-bottom foi mantido em 70px.
+     */
+    padding: 85px 0 70px 0;
+    /* padding: top right bottom left; */
 }
 
 /* Lógica de visibilidade das seções */
@@ -60,7 +64,6 @@ body {
 .visible-section {
     display: block !important;
     animation: fadeInSection 0.6s ease-out;
-    /* Animação mais rápida */
 }
 
 @keyframes fadeInSection {
@@ -75,17 +78,36 @@ body {
     }
 }
 
+/* Estilo para parágrafos introdutórios e de encerramento de seção */
+.secao-introducao,
+.secao-encerramento {
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--cor-texto-secundario);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+}
+
+.secao-introducao {
+    margin-bottom: 40px;
+}
+
+.secao-encerramento {
+    margin-top: 40px;
+}
+
+
 /* Cabeçalho e Navegação Modernizados */
 header {
     background-color: var(--cor-fundo-principal);
     padding: 15px 0;
-    /* Mais padding vertical */
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
     box-shadow: var(--sombra-padrao);
-    /* Sombra moderna */
 }
 
 header .container {
@@ -96,9 +118,7 @@ header .container {
 
 header .logo {
     font-size: 1.6em;
-    /* Ajuste de tamanho */
     font-weight: 600;
-    /* Mais destaque */
     color: var(--cor-texto-principal);
     text-decoration: none;
     transition: color 0.3s ease;
@@ -112,63 +132,50 @@ header nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    /* Alinha verticalmente os itens */
 }
 
 header nav ul li {
     margin-left: 30px;
-    /* Mais espaçamento entre links */
 }
 
 header nav ul li a.nav-link {
     color: var(--cor-texto-secundario);
     text-decoration: none;
     font-size: 1em;
-    /* Tamanho padrão para links de nav */
     font-weight: 500;
-    /* Peso médio */
     padding: 10px 15px;
     border-radius: var(--border-radius-padrao);
     position: relative;
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     border: 2px solid transparent;
-    /* Borda transparente inicialmente */
 }
 
 header nav ul li a.nav-link:hover {
     color: var(--cor-texto-principal);
     border-color: var(--cor-borda-sutil);
-    /* Borda sutil no hover */
     background-color: var(--cor-fundo-secao-alternativa);
 }
 
 header nav ul li a.nav-link.active-link {
     color: var(--cor-acento-primario);
-    /* Cor de destaque para link ativo */
     font-weight: 600;
-    /* Mais peso para ativo */
     border-color: var(--cor-acento-primario);
-    /* Borda mais forte para link ativo */
     background-color: var(--cor-fundo-secao-alternativa);
-    /* Fundo para ativo */
 }
 
 /* Parallax Banner */
 #parallax-banner {
     min-height: 65vh;
-    /* Altura ajustada */
     width: 100%;
-    /* Certifique-se de que a imagem 'ftDiogo2.jpg' (ou .png, .webp) está na pasta 'imagens/' */
     background-image: url('imagens/ftDiogo2.PNG');
+    /* Verifique se este caminho está correto */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     filter: grayscale(100%);
-    margin-top: 80px;
-    /* Ajustar conforme altura final do header. */
-    /* Este valor (80px) corresponde a um header com padding: 15px 0 e font-size: 1.6em no logo. */
-    /* Se o header ficar mais alto (ex: logo maior), aumente este valor. */
+    margin-top: 82px;
+    /* Altura aproximada do header, ajuste se necessário */
 }
 
 #parallax-banner.visible-section {
@@ -180,16 +187,14 @@ header nav ul li a.nav-link.active-link {
 h2 {
     text-align: center;
     font-size: 2.5em;
-    /* Tamanho maior */
     font-weight: 600;
     margin-bottom: 50px;
-    /* Mais espaço abaixo */
     color: var(--cor-texto-principal);
 }
 
 h3 {
-    /* Títulos H3 internos */
     font-size: 1.5em;
+    /* Reduzido um pouco para consistência, pode ser ajustado */
     font-weight: 600;
     color: var(--cor-texto-principal);
     margin-bottom: 15px;
@@ -201,12 +206,13 @@ h3 {
     flex-wrap: wrap;
     gap: 40px;
     align-items: flex-start;
-    /* Alinha itens ao topo */
+    /* Alinha os itens no topo */
 }
 
 .sobre-mim-texto {
     flex: 1 1 55%;
-    /* Cresce, encolhe, base de 55% */
+    min-width: 300px;
+    /* Para melhor responsividade */
 }
 
 .sobre-mim-texto p {
@@ -217,7 +223,8 @@ h3 {
 
 .sobre-mim-imagem {
     flex: 1 1 40%;
-    /* Cresce, encolhe, base de 40% */
+    min-width: 300px;
+    /* Para melhor responsividade */
     text-align: center;
 }
 
@@ -225,34 +232,36 @@ h3 {
     max-width: 100%;
     height: auto;
     border-radius: var(--border-radius-padrao);
-    /* Bordas arredondadas */
     box-shadow: var(--sombra-padrao);
+}
+
+.sobre-mim-botoes {
+    margin-top: 20px;
+    display: flex;
+    /* Para alinhar botões */
+    gap: 15px;
+    /* Espaço entre botões */
+    flex-wrap: wrap;
+    /* Para quebra de linha em telas menores */
 }
 
 /* Botões Modernizados */
 .btn {
     display: inline-block;
     padding: 12px 28px;
-    /* Mais padding */
     text-decoration: none;
     border-radius: var(--border-radius-padrao);
-    /* Bordas arredondadas */
     font-weight: 500;
-    /* Peso médio */
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     border: 1px solid transparent;
-    /* Borda transparente por padrão */
     cursor: pointer;
     font-size: 1em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    /* Sombra sutil inicial */
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    /* Efeito de levantar */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    /* Sombra mais pronunciada no hover */
 }
 
 .btn-primary {
@@ -270,7 +279,6 @@ h3 {
     background-color: var(--cor-fundo-principal);
     color: var(--cor-acento-primario);
     border: 1px solid var(--cor-borda-sutil);
-    /* Borda sutil */
 }
 
 .btn-secondary:hover {
@@ -278,12 +286,6 @@ h3 {
     border-color: var(--cor-acento-primario);
     color: var(--cor-acento-primario);
 }
-
-.sobre-mim-botoes {
-    /* Container para os botões */
-    margin-top: 20px;
-}
-
 
 /* Seção Serviços */
 #servicos {
@@ -296,12 +298,10 @@ h3 {
     margin-bottom: 40px;
     flex-wrap: wrap;
     gap: 10px;
-    /* Espaço entre botões de aba */
 }
 
 .tab-button {
     padding: 10px 25px;
-    /* Mais padding */
     font-size: 1em;
     font-weight: 500;
     background-color: var(--cor-fundo-principal);
@@ -329,73 +329,297 @@ h3 {
 .tab-content {
     display: none;
     padding: 25px;
-    /* Mais padding */
     background-color: var(--cor-fundo-principal);
     border-radius: var(--border-radius-padrao);
     box-shadow: var(--sombra-padrao);
     animation: fadeInSection 0.5s ease-out;
+    /* Reutilizando animação de fade */
 }
 
 .tab-content.active {
     display: block;
 }
 
-.tab-content h3 {
+.servico-item-layout {
+    display: flex;
+    align-items: stretch;
+    /* Faz com que a imagem e a descrição tenham a mesma altura */
+    gap: 30px;
+    flex-wrap: wrap;
+    /* Para telas menores */
+}
+
+.servico-imagem {
+    flex: 0 0 35%;
+    max-width: 35%;
+    min-width: 280px;
+    /* Largura mínima para a imagem */
+}
+
+.servico-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Garante que a imagem cubra o espaço sem distorcer */
+    display: block;
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-padrao);
+}
+
+.servico-descricao {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    /* Largura mínima para o texto */
+}
+
+.servico-descricao h3 {
     font-size: 1.4em;
     font-weight: 600;
     color: var(--cor-texto-principal);
     margin-bottom: 10px;
 }
 
-/* Seção Contato */
-#contato p.intro-contato {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 1.1em;
+.servico-descricao p {
+    font-size: 1em;
     color: var(--cor-texto-secundario);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.servico-cta {
+    margin-top: auto;
+    /* Empurra o link para o final do card */
+    align-self: flex-start;
+    /* Alinha à esquerda, pode ser flex-end para direita */
+    padding-top: 15px;
+    /* Espaço acima do link */
+    margin-bottom: 0;
+    /* Remove margem inferior do parágrafo */
+}
+
+.link-discreto {
+    color: var(--cor-acento-primario);
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-padrao);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent;
+    /* Borda transparente para alinhamento */
+    display: inline-block;
+}
+
+.link-discreto:hover {
+    background-color: var(--cor-fundo-secao-alternativa);
+    color: var(--cor-acento-hover);
+    border-color: var(--cor-borda-sutil);
+    /* Borda sutil no hover */
+    text-decoration: none;
+}
+
+/* === SEÇÃO CONTATO ATUALIZADA === */
+#contato {
+    background-color: var(--cor-fundo-secao-alternativa);
+    /* SUGESTÃO OPCIONAL DE IMAGEM DE FUNDO SUTIL */
+    /* background-image: url('imagens/sua-imagem-de-fundo-musical.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* background-blend-mode: overlay; */
+}
+
+#contato .container.section-padding {
+    /*
+     * Define o espaçamento interno para o container da seção de Contato.
+     * O padding-top foi aumentado para 85px para garantir que o conteúdo
+     * não seja sobreposto pelo cabeçalho fixo.
+     * Os paddings laterais (20px) e o padding-bottom (40px) foram mantidos
+     * conforme a definição original específica para esta seção.
+     */
+    padding: 85px 20px 40px 20px;
+    /* padding: top right bottom left */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#contato h2 {
+    text-align: center;
+    color: var(--cor-texto-principal);
+    margin-bottom: 20px;
+    /* Reduzido para a seção de contato */
 }
 
 .contato-info {
     display: grid;
-    /* Usando grid para layout moderno */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    /* Colunas responsivas */
     gap: 30px;
-    /* Espaço entre itens */
+    margin-bottom: 40px;
+    /* Espaço antes do formulário/FAQ */
 }
 
-.contato-item {
+a.contato-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 30px;
-    /* Mais padding */
-    background-color: var(--cor-fundo-principal);
+    background-color: var(--cor-acento-primario);
+    color: var(--cor-branco);
     border-radius: var(--border-radius-padrao);
     box-shadow: var(--sombra-padrao);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    min-height: 220px;
 }
 
-.contato-item:hover {
+a.contato-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.contato-item h4 {
+.contato-icone {
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.contato-icone svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--cor-branco);
+    transition: fill 0.3s ease;
+}
+
+a.contato-item h4 {
     font-size: 1.3em;
     font-weight: 600;
-    color: var(--cor-texto-principal);
     margin-bottom: 10px;
 }
 
-.contato-item p a {
-    color: var(--cor-acento-primario);
-    text-decoration: none;
+a.contato-item p {
     font-weight: 500;
+    font-size: 0.95em;
+    line-height: 1.4;
 }
 
-.contato-item p a:hover {
-    color: var(--cor-acento-hover);
-    text-decoration: underline;
+a.contato-item.telefone-item:hover {
+    background-color: #4CAF50;
 }
+
+a.contato-item.whatsapp-item:hover {
+    background-color: #25D366;
+}
+
+a.contato-item.instagram-item:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+/* Estilos para o Formulário de Contato e FAQ */
+
+.formulario-contato-container {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 35px;
+    background-color: var(--cor-fundo-principal);
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-padrao);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formulario-contato-container h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--cor-texto-principal);
+    font-size: 1.8em;
+}
+
+#formContato div {
+    margin-bottom: 20px;
+}
+
+#formContato label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+}
+
+#formContato input[type="text"],
+#formContato input[type="email"],
+#formContato textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda-sutil);
+    border-radius: var(--border-radius-padrao);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-secao-alternativa);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#formContato input[type="text"]:focus,
+#formContato input[type="email"]:focus,
+#formContato textarea:focus {
+    outline: none;
+    border-color: var(--cor-acento-primario);
+    box-shadow: 0 0 0 3px rgba(52, 58, 64, 0.15);
+}
+
+#formContato button[type="submit"] {
+    display: block;
+    width: auto;
+    min-width: 200px;
+    margin: 20px auto 0 auto;
+    padding: 12px 28px;
+}
+
+/* Estilos para a Seção de Perguntas Frequentes (FAQ) */
+.faq-container {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-container h3 {
+    text-align: center;
+    margin-bottom: 35px;
+    color: var(--cor-texto-principal);
+    font-size: 1.8em;
+}
+
+.faq-item {
+    background-color: transparent;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid var(--cor-borda-sutil);
+    border-radius: var(--border-radius-padrao);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--cor-acento-primario);
+    transform: translateY(-3px);
+}
+
+.faq-item h4 {
+    font-size: 1.3em;
+    color: var(--cor-acento-primario);
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    font-size: 1em;
+    color: var(--cor-texto-secundario);
+    line-height: 1.7;
+}
+
 
 /* Rodapé */
 footer {
@@ -403,25 +627,23 @@ footer {
     color: var(--cor-fundo-secao-alternativa);
     text-align: center;
     padding: 25px 0;
-    /* Mais padding */
-    margin-top: 50px;
+    /* margin-top: 50px; Removido ou ajustado, pois o conteúdo da página deve empurrá-lo naturalmente */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     body {
         font-size: 95%;
+        /* Ajuste global para telas menores */
     }
-
-    /* Ajuste global para telas menores */
 
     #parallax-banner {
         min-height: 40vh;
-        /* Ajuste o margin-top se o header empilhado ficar muito alto */
+        /* Reduz altura do parallax em telas menores */
         margin-top: 70px;
-        /* Valor inicial, pode precisar aumentar se o header crescer muito */
+        /* Ajuste para altura do header em mobile, se diferente */
         background-attachment: scroll;
-        /* Desativa parallax fixo no mobile */
+        /* Melhora performance em mobile */
     }
 
     header {
@@ -430,38 +652,117 @@ footer {
 
     header .container {
         flex-direction: column;
+        /* Empilha logo e nav em mobile */
         gap: 10px;
     }
 
     header nav ul {
         margin-top: 10px;
         flex-wrap: wrap;
-        /* Permite que os links quebrem linha se necessário */
         justify-content: center;
     }
 
     header nav ul li {
         margin: 5px 10px;
-        /* Ajuste de margem para links empilhados */
+        /* Ajusta espaçamento dos links do menu */
     }
 
     h2 {
         font-size: 2em;
+        /* Reduz tamanho dos títulos principais */
+    }
+
+    .secao-introducao,
+    .secao-encerramento {
+        font-size: 1em;
+        padding: 0 10px;
+        /* Adiciona padding lateral em mobile */
     }
 
     .sobre-mim-content {
         flex-direction: column;
+        /* Empilha texto e imagem */
         gap: 30px;
     }
 
     .sobre-mim-texto,
     .sobre-mim-imagem {
         flex-basis: 100%;
-        /* Ocupam toda a largura quando empilhados */
+        /* Ocupa toda a largura */
+    }
+
+    .sobre-mim-botoes {
+        justify-content: center;
+        /* Centraliza botões em telas menores */
+    }
+
+    .servico-item-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .servico-imagem {
+        flex-basis: auto;
+        /* Reseta flex-basis */
+        width: 80%;
+        /* Ajusta largura da imagem do serviço */
+        max-width: 300px;
+        /* Limita o tamanho máximo */
+        margin-bottom: 20px;
+    }
+
+    .servico-imagem img {
+        height: auto;
+        /* Altura automática para manter proporção */
+        object-fit: contain;
+        /* Garante que toda imagem apareça */
+    }
+
+    .servico-descricao {
+        flex-basis: auto;
+        align-items: center;
+    }
+
+    .servico-descricao h3 {
+        text-align: center;
+    }
+
+    .servico-cta {
+        align-self: center;
+        /* Centraliza o CTA */
+        margin-top: 20px;
     }
 
     .contato-info {
         grid-template-columns: 1fr;
-        /* Uma coluna no mobile */
+        /* Uma coluna para itens de contato */
+    }
+
+    a.contato-item {
+        min-height: 180px;
+        /* Altura mínima para itens de contato em mobile */
+    }
+
+    .formulario-contato-container,
+    .faq-container {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .formulario-contato-container h3,
+    .faq-container h3 {
+        font-size: 1.6em;
+    }
+
+    .faq-item h4 {
+        font-size: 1.2em;
+    }
+
+    #formContato button[type="submit"] {
+        width: 100%;
+        /* Botão do formulário ocupa largura total */
     }
 }

@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         behavior: 'smooth'
                     });
                 }
-            }, 2500); // 2.5 segundos
+            }, 1000); // 2.5 segundos
         } else if (!isAboutTarget) { // Scroll para o topo de outras seções ao navegar
             const targetSectionElement = document.getElementById(targetId);
             if (targetSectionElement && header) {
