@@ -1,687 +1,467 @@
-/* style.css */
-
-/* --- Variáveis CSS para Cores e Fontes --- */
-:root {
-    --primary-color: #333;
-    --accent-color: #007bff; /* Azul vibrante */
-    --accent-hover-color: #0056b3;
-    --secondary-accent-color: #6c757d;
-    --bg-light: #f8f9fa;
-    --bg-dark: #212529;
-    --text-dark: #222;
-    --text-light: #fff; /* Usado na hero section e nav */
-    --nav-bg-color: rgba(34, 34, 34, 0.85); /* Fundo da nav mais opaco */
-    --nav-link-color: rgba(255, 255, 255, 0.7); /* Cor dos links da nav */
-    --nav-link-hover-color: #ffffff; /* Cor dos links da nav no hover */
-    --bg-primary: #1a1a1a; /* Cor de fundo principal escura para a splash screen */
-
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Open Sans', sans-serif;
-
-    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
-    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
-    --shadow-strong: 0 12px 35px rgba(0, 0, 0, 0.2); /* Ajustado para 0.2 */
-}
-
-/* --- Estilos Globais e Reset Básico --- */
+/* Reset básico e Importação da Fonte */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+/* Variáveis de Cor Modernizadas (P&B e Cinzas) */
+:root {
+    --cor-fundo-principal: #FFFFFF;
+    /* Branco */
+    --cor-texto-principal: #212529;
+    /* Preto suave, moderno */
+    --cor-fundo-secao-alternativa: #F8F9FA;
+    /* Cinza muito claro */
+    --cor-texto-secundario: #6C757D;
+    /* Cinza médio para subtextos */
+    --cor-acento-primario: #343A40;
+    /* Cinza escuro para elementos ativos/botões */
+    --cor-acento-hover: #495057;
+    /* Cinza um pouco mais claro para hover */
+    --cor-borda-sutil: #DEE2E6;
+    /* Cinza bem claro para bordas */
+    --cor-branco: #FFFFFF;
+
+    --sombra-padrao: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Sombra sutil moderna */
+    --border-radius-padrao: 8px;
+    /* Raio de borda padrão */
 }
 
 body {
-    font-family: var(--font-body);
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--bg-light);
-    overflow-x: hidden; /* Garante que não haja barra de rolagem horizontal */
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    font-family: 'Poppins', sans-serif;
+    /* Aplicando Poppins globalmente */
+    line-height: 1.7;
+    /* Melhor legibilidade */
+    font-weight: 400;
+    /* Peso padrão */
 }
 
-a {
-    color: var(--accent-color);
+.container {
+    width: 90%;
+    max-width: 1100px;
+    /* Um pouco mais largo para layouts modernos */
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 70px 0;
+    /* Mais espaçamento vertical */
+}
+
+/* Lógica de visibilidade das seções */
+.content-section {
+    display: none;
+}
+
+.visible-section {
+    display: block !important;
+    animation: fadeInSection 0.6s ease-out;
+    /* Animação mais rápida */
+}
+
+@keyframes fadeInSection {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cabeçalho e Navegação Modernizados */
+header {
+    background-color: var(--cor-fundo-principal);
+    padding: 15px 0;
+    /* Mais padding vertical */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--sombra-padrao);
+    /* Sombra moderna */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.6em;
+    /* Ajuste de tamanho */
+    font-weight: 600;
+    /* Mais destaque */
+    color: var(--cor-texto-principal);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-a:hover {
-    color: var(--accent-hover-color);
+header .logo:hover {
+    color: var(--cor-acento-primario);
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- Overlay de Carregamento --- */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-primary); /* Mesma cor da splash screen */
+header nav ul {
+    list-style: none;
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 1000; /* Acima de tudo */
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
+    /* Alinha verticalmente os itens */
 }
 
-.loading-overlay.fade-out {
-    opacity: 0;
+header nav ul li {
+    margin-left: 30px;
+    /* Mais espaçamento entre links */
 }
 
-.spinner {
-    border: 8px solid rgba(255, 255, 255, 0.3); /* Ajustado para 8px */
-    border-top: 8px solid var(--accent-color); /* Ajustado para 8px */
-    border-radius: 50%;
-    width: 60px; /* Ajustado */
-    height: 60px; /* Ajustado */
-    animation: spin 1.5s linear infinite; /* Ajustado para 1.5s */
+header nav ul li a.nav-link {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    font-size: 1em;
+    /* Tamanho padrão para links de nav */
+    font-weight: 500;
+    /* Peso médio */
+    padding: 10px 15px;
+    border-radius: var(--border-radius-padrao);
+    position: relative;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid transparent;
+    /* Borda transparente inicialmente */
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+header nav ul li a.nav-link:hover {
+    color: var(--cor-texto-principal);
+    border-color: var(--cor-borda-sutil);
+    /* Borda sutil no hover */
+    background-color: var(--cor-fundo-secao-alternativa);
 }
 
-/* --- Splash Screen --- */
-.splash-screen-section {
-    position: fixed; /* Fixa na tela */
-    top: 0;
-    left: 0;
+header nav ul li a.nav-link.active-link {
+    color: var(--cor-acento-primario);
+    /* Cor de destaque para link ativo */
+    font-weight: 600;
+    /* Mais peso para ativo */
+    border-color: var(--cor-acento-primario);
+    /* Borda mais forte para link ativo */
+    background-color: var(--cor-fundo-secao-alternativa);
+    /* Fundo para ativo */
+}
+
+/* Parallax Banner */
+#parallax-banner {
+    min-height: 65vh;
+    /* Altura ajustada */
     width: 100%;
-    height: 100vh; /* Ocupa a altura total da viewport */
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-light);
-    text-align: center;
-    z-index: 999; /* Garante que fique acima do conteúdo principal */
-    /* Transição mais rápida e com um 'ease-in-out' para suavidade */
-    transition: opacity 2s ease-in-out, transform 2s ease-in-out, filter 2s ease-in-out, visibility 2s ease-in-out;
-
-    /* Estado inicial para o zoom-in (usado pelo JS para transição) */
-    transform: scale(1);
-    filter: blur(0px);
-    opacity: 1;
-    visibility: visible;
-}
-
-/* NOVO: Classe para a animação de saída da splash screen: zoom IN e blur OUT */
-/* Essa classe será adicionada pelo JavaScript */
-.splash-screen-section.zoom-in-blur-out {
-    opacity: 0; /* Desaparece */
-    transform: scale(1.1); /* Ajustado para um zoom mais suave para DENTRO */
-    filter: blur(5px); /* Aplica o desfoque */
-    visibility: hidden; /* Esconde no final da transição */
-}
-
-.splash-screen-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+    /* Certifique-se de que a imagem 'ftDiogo2.jpg' (ou .png, .webp) está na pasta 'imagens/' */
+    background-image: url('imagens/ftDiogo2.PNG');
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1;
-    filter: brightness(0.4); /* Escurece a imagem para 40% de brilho */
+    background-size: cover;
+    filter: grayscale(100%);
+    margin-top: 80px;
+    /* Ajustar conforme altura final do header. */
+    /* Este valor (80px) corresponde a um header com padding: 15px 0 e font-size: 1.6em no logo. */
+    /* Se o header ficar mais alto (ex: logo maior), aumente este valor. */
 }
 
-.darken-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0); /* Começa transparente */
-    z-index: 0; /* Entre o BG e o conteúdo */
-    transition: background-color 0.8s ease-in-out; /* Transição para o escurecimento */
+#parallax-banner.visible-section {
+    display: block !important;
+    animation: fadeInSection 0.6s ease-out;
 }
 
-.darken-overlay.active-darken {
-    background-color: rgba(0, 0, 0, 1); /* Fica preto opaco */
+/* Títulos de Seção */
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    /* Tamanho maior */
+    font-weight: 600;
+    margin-bottom: 50px;
+    /* Mais espaço abaixo */
+    color: var(--cor-texto-principal);
 }
 
-.splash-screen-content {
-    position: relative;
-    z-index: 1;
-    max-width: 900px; /* Adicionado para controlar a largura máxima */
-    padding: 0 1.5rem;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
-    margin-top: -80px; /* Ajusta a posição vertical */
+h3 {
+    /* Títulos H3 internos */
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    margin-bottom: 15px;
 }
 
-.hero-quote {
-    font-family: var(--font-heading);
-    font-size: 3.8rem; /* Ajustado para a imagem de referência */
-    font-weight: 500; /* Ajustado */
-    line-height: 1.3;
-    margin-bottom: 1.5rem; /* Ajustado */
-    color: white; /* Cor da fonte */
-    animation: fadeInDown 1.2s ease-out; /* Adicionado a animação inicial */
+/* Seção Sobre Mim */
+.sobre-mim-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    /* Alinha itens ao topo */
 }
 
-.hero-author {
-    font-family: var(--font-heading); /* Alterado para font-heading como na ref. */
-    font-size: 1.8rem; /* Ajustado para a imagem de referência */
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 3rem; /* Aumentado espaçamento */
-    animation: fadeInUp 1.2s ease-out 0.3s forwards; /* Adicionado a animação inicial */
-    opacity: 0; /* Inicia invisível para a animação */
+.sobre-mim-texto {
+    flex: 1 1 55%;
+    /* Cresce, encolhe, base de 55% */
 }
 
-/* ESTILO DO BOTÃO "Descobrir o Site" */
-.discover-button { /* Usando a classe que foi adicionada no HTML */
-    display: inline-flex;
-    align-items: center;
+.sobre-mim-texto p {
+    font-size: 1.05em;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 25px;
+}
+
+.sobre-mim-imagem {
+    flex: 1 1 40%;
+    /* Cresce, encolhe, base de 40% */
+    text-align: center;
+}
+
+.sobre-mim-imagem img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-padrao);
+    /* Bordas arredondadas */
+    box-shadow: var(--sombra-padrao);
+}
+
+/* Botões Modernizados */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    /* Mais padding */
+    text-decoration: none;
+    border-radius: var(--border-radius-padrao);
+    /* Bordas arredondadas */
+    font-weight: 500;
+    /* Peso médio */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+    /* Borda transparente por padrão */
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Sombra sutil inicial */
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    /* Efeito de levantar */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra mais pronunciada no hover */
+}
+
+.btn-primary {
+    background-color: var(--cor-acento-primario);
+    color: var(--cor-branco);
+    border-color: var(--cor-acento-primario);
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-acento-hover);
+    border-color: var(--cor-acento-hover);
+}
+
+.btn-secondary {
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-acento-primario);
+    border: 1px solid var(--cor-borda-sutil);
+    /* Borda sutil */
+}
+
+.btn-secondary:hover {
+    background-color: var(--cor-fundo-secao-alternativa);
+    border-color: var(--cor-acento-primario);
+    color: var(--cor-acento-primario);
+}
+
+.sobre-mim-botoes {
+    /* Container para os botões */
+    margin-top: 20px;
+}
+
+
+/* Seção Serviços */
+#servicos {
+    background-color: var(--cor-fundo-secao-alternativa);
+}
+
+.servicos-tabs {
+    display: flex;
     justify-content: center;
-    white-space: nowrap;
-    box-sizing: border-box;
-    background-color: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda semitransparente */
-    padding: 0.8rem 2rem; /* Ajustado */
-    border-radius: 50px; /* Borda mais arredondada */
-    font-size: 1rem;
-    font-weight: 400;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Espaço entre botões de aba */
+}
+
+.tab-button {
+    padding: 10px 25px;
+    /* Mais padding */
+    font-size: 1em;
+    font-weight: 500;
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-secundario);
+    border: 1px solid var(--cor-borda-sutil);
+    border-radius: var(--border-radius-padrao);
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: none; /* Removido a sombra */
-    animation: zoomIn 1s ease-out 0.6s forwards; /* Animação inicial */
-    opacity: 0; /* Inicia invisível para a animação */
-    margin-top: 1rem; /* Adicionado espaçamento superior */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
 }
 
-.discover-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: white;
-    transform: translateY(-5px);
+.tab-button:hover {
+    border-color: var(--cor-acento-primario);
+    color: var(--cor-acento-primario);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.discover-button i {
-    margin-left: 0.75rem;
-    font-size: 0.9rem;
+.tab-button.active {
+    background-color: var(--cor-acento-primario);
+    color: var(--cor-branco);
+    border-color: var(--cor-acento-primario);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Novas Animações (Adicione estas se ainda não as tiver) --- */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
+.tab-content {
+    display: none;
+    padding: 25px;
+    /* Mais padding */
+    background-color: var(--cor-fundo-principal);
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-padrao);
+    animation: fadeInSection 0.5s ease-out;
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes zoomIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* --- Conteúdo Principal do Site (site-content) --- */
-.site-content {
-    min-height: calc(100vh - 70px); /* Ajustado para considerar a navbar */
-    padding-top: 70px; /* Espaçamento para a navbar fixa */
-    background-color: white; /* Cor de fundo branca */
-    /* Sincroniza a duração com a splash screen */
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out, filter 1.5s ease-in-out, visibility 1.5s ease-in-out;
-    /* Inicia com um zoom reverso mais sutil e desfoque para a transição fluida */
-    transform: scale(0.9); /* Começa um pouco menor para a transição de entrada */
-    filter: blur(8px); /* Começa mais desfocado */
-    opacity: 0;
-    visibility: hidden;
-    overflow-x: hidden; /* Garante que não haja barra de rolagem horizontal durante a transição */
-}
-
-.site-content.show-content {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1); /* Vai para o tamanho normal */
-    filter: blur(0); /* Remove o desfoque */
-}
-
-
-/* --- Navbar --- */
-.main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--nav-bg-color);
-    padding: 15px 0;
-    box-shadow: var(--shadow-light);
-    z-index: 500; /* Abaixo da splash screen, mas acima do conteúdo */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transição para aparecer */
-}
-
-.main-nav .container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza os itens da navbar */
-}
-
-.logo {
-    font-family: var(--font-heading);
-    font-size: 1.8em;
-    font-weight: 700;
-    color: var(--text-light);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    margin-left: auto; /* Empurra os links para a direita */
-}
-
-.nav-links li {
-    margin-left: 30px;
-}
-
-.nav-item {
-    font-family: var(--font-body);
-    color: var(--nav-link-color);
-    font-weight: 600;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    padding-bottom: 5px; /* Espaço para a borda */
-}
-
-.nav-item:hover,
-.nav-item.active {
-    color: var(--nav-link-hover-color);
-    border-bottom: 2px solid var(--accent-color); /* Adiciona um sublinhado */
-}
-
-/* Mobile Menu Toggle */
-.mobile-menu-toggle {
-    display: none; /* Escondido por padrão em desktop */
-    font-size: 1.8em;
-    color: var(--text-light);
-    cursor: pointer;
-}
-
-.mobile-menu-dropdown {
-    list-style: none;
-    background-color: var(--nav-bg-color);
-    position: fixed;
-    top: 60px; /* Altura da navbar */
-    left: 0;
-    width: 100%;
-    max-height: 0; /* Começa escondido */
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    box-shadow: var(--shadow-light);
-    z-index: 499; /* Abaixo da navbar */
-}
-
-.mobile-menu-dropdown.show {
-    max-height: 300px; /* Altura suficiente para mostrar os itens */
-}
-
-.mobile-menu-dropdown li {
-    text-align: center;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-menu-dropdown li:last-child {
-    border-bottom: none;
-}
-
-.mobile-nav-item {
-    font-family: var(--font-body);
-    color: var(--nav-link-color);
-    font-weight: 600;
-    display: block; /* Para ocupar toda a largura do li */
-    padding: 10px 0;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.mobile-nav-item:hover,
-.mobile-nav-item.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--nav-link-hover-color);
-}
-
-/* --- Seções de Conteúdo --- */
-.content-section {
-    padding: 80px 0;
-    opacity: 0; /* Inicia invisível */
-    transform: translateY(20px); /* Começa ligeiramente abaixo */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.content-section.in-view {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.section-title {
-    font-family: var(--font-heading);
-    font-size: 3em;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    position: relative;
-    display: inline-block; /* Para o sublinhado */
-}
-
-.section-title::after {
-    content: '';
+.tab-content.active {
     display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--accent-color);
-    margin: 10px auto 0;
-    border-radius: 2px;
 }
 
-.section-subtitle {
-    font-family: var(--font-body);
-    font-size: 1.2em;
-    color: var(--secondary-accent-color);
-    margin-bottom: 50px;
+.tab-content h3 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    margin-bottom: 10px;
 }
 
-/* --- Seção "Sobre Diogo" --- */
-.about-me-section {
-    background-color: var(--bg-light);
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 40px;
-    align-items: center;
-    text-align: left;
-}
-
-.about-image-container {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto;
-    box-shadow: var(--shadow-medium);
-}
-
-.about-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.about-text p {
-    margin-bottom: 15px;
+/* Seção Contato */
+#contato p.intro-contato {
+    text-align: center;
+    margin-bottom: 40px;
     font-size: 1.1em;
-    line-height: 1.8;
+    color: var(--cor-texto-secundario);
 }
 
-/* --- Seção "Serviços" --- */
-.services-section {
-    background-color: #f0f0f0; /* Um fundo ligeiramente diferente */
-}
-
-.services-grid {
+.contato-info {
     display: grid;
+    /* Usando grid para layout moderno */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Colunas responsivas */
     gap: 30px;
+    /* Espaço entre itens */
 }
 
-.service-card {
-    background-color: #fff;
+.contato-item {
+    text-align: center;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: var(--shadow-medium);
+    /* Mais padding */
+    background-color: var(--cor-fundo-principal);
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-padrao);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-strong);
-}
-
-.service-icon {
-    font-size: 4em;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-}
-
-.service-card h3 {
-    font-family: var(--font-heading);
-    font-size: 1.8em;
-    margin-bottom: 15px;
-    color: var(--primary-color);
-}
-
-.service-card p {
-    font-size: 1em;
-    color: var(--secondary-accent-color);
-}
-
-/* --- Seção "Portfólio" --- */
-.portfolio-section {
-    background-color: var(--bg-light);
-}
-
-.portfolio-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.portfolio-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: var(--shadow-medium);
-    transition: transform 0.3s ease;
-}
-
-.portfolio-item:hover {
+.contato-item:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.portfolio-image {
-    width: 100%;
-    height: 250px; /* Altura fixa para uniformidade */
-    object-fit: cover;
-    transition: transform 0.5s ease;
+.contato-item h4 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    margin-bottom: 10px;
 }
 
-.portfolio-item:hover .portfolio-image {
-    transform: scale(1.05);
+.contato-item p a {
+    color: var(--cor-acento-primario);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-.portfolio-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: var(--text-light);
-    padding: 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+.contato-item p a:hover {
+    color: var(--cor-acento-hover);
+    text-decoration: underline;
 }
 
-.portfolio-item:hover .portfolio-overlay {
-    transform: translateY(0);
+/* Rodapé */
+footer {
+    background-color: var(--cor-texto-principal);
+    color: var(--cor-fundo-secao-alternativa);
+    text-align: center;
+    padding: 25px 0;
+    /* Mais padding */
+    margin-top: 50px;
 }
 
-.portfolio-overlay h4 {
-    font-family: var(--font-heading);
-    font-size: 1.5em;
-    margin-bottom: 5px;
-}
-
-.portfolio-overlay p {
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* --- Seção "Contato" --- */
-.contact-section {
-    background-color: #f0f0f0;
-}
-
-.contact-info {
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 1.1em;
-}
-
-.contact-info p {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.contact-info .icon-small {
-    font-size: 1.2em;
-    margin-right: 10px;
-    color: var(--accent-color);
-}
-
-.social-links {
-    margin-top: 30px;
-}
-
-.social-icon {
-    display: inline-block;
-    font-size: 2em;
-    color: var(--primary-color);
-    margin: 0 15px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icon:hover {
-    color: var(--accent-color);
-    transform: translateY(-5px);
-}
-
-/* --- Rodapé --- */
-.footer {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    padding: 30px 0;
-    font-size: 0.9em;
-}
-
-/* --- Media Queries para Responsividade --- */
-@media (max-width: 992px) {
-    .hero-quote {
-        font-size: 2.8rem; /* Ajustado para a imagem de referência */
-    }
-    .hero-author {
-        font-size: 1.6rem; /* Ajustado para a imagem de referência */
-    }
-    .discover-button {
-        padding: 0.7rem 1.8rem; /* Ajustado para a imagem de referência */
-        font-size: 1rem; /* Ajustado para a imagem de referência */
-    }
-    .nav-links {
-        margin-left: 0; /* Remove o margin-left */
-    }
-    .main-nav .container {
-        justify-content: space-between; /* Ajusta o alinhamento para mobile */
-    }
-    .section-title {
-        font-size: 2.5rem;
-    }
-    .section-subtitle {
-        font-size: 1.1rem;
-    }
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-    .about-image-container {
-        width: 250px;
-        height: 250px;
-    }
-    .about-text {
-        text-align: center;
-    }
-    .about-text p {
-        font-size: 1rem;
-    }
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    .service-card {
-        padding: 2rem;
-    }
-    .service-icon {
-        font-size: 3.5rem;
-    }
-    .portfolio-gallery {
-        grid-template-columns: 1fr;
-    }
-    .portfolio-item {
-        margin-bottom: 20px;
-    }
-    .contact-info p {
-        flex-direction: column;
-        align-items: center;
-    }
-    .contact-info .icon-small {
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
-    .hero-quote {
-        font-size: 2.5rem; /* Ajustado para a imagem de referência */
+    body {
+        font-size: 95%;
     }
-    .hero-author {
-        font-size: 1.4rem; /* Ajustado para a imagem de referência */
-    }
-    .discover-button {
-        padding: 0.6rem 1.5rem; /* Ajustado para a imagem de referência */
-        font-size: 0.9rem; /* Ajustado para a imagem de referência */
-    }
-    /* Navbar Mobile */
-    .nav-links {
-        display: none;
-    }
-    .mobile-menu-toggle {
-        display: block;
-    }
-    .main-nav .container {
-        justify-content: space-between;
-    }
-}
 
-@media (max-width: 480px) {
-    .hero-quote {
-        font-size: 2rem; /* Ajustado para a imagem de referência */
+    /* Ajuste global para telas menores */
+
+    #parallax-banner {
+        min-height: 40vh;
+        /* Ajuste o margin-top se o header empilhado ficar muito alto */
+        margin-top: 70px;
+        /* Valor inicial, pode precisar aumentar se o header crescer muito */
+        background-attachment: scroll;
+        /* Desativa parallax fixo no mobile */
     }
-    .hero-author {
-        font-size: 1.2rem; /* Ajustado para a imagem de referência */
+
+    header {
+        padding: 10px 0;
     }
-    .splash-screen-content {
-        padding: 15px;
+
+    header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header nav ul {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        /* Permite que os links quebrem linha se necessário */
+        justify-content: center;
+    }
+
+    header nav ul li {
+        margin: 5px 10px;
+        /* Ajuste de margem para links empilhados */
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .sobre-mim-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sobre-mim-texto,
+    .sobre-mim-imagem {
+        flex-basis: 100%;
+        /* Ocupam toda a largura quando empilhados */
+    }
+
+    .contato-info {
+        grid-template-columns: 1fr;
+        /* Uma coluna no mobile */
     }
 }

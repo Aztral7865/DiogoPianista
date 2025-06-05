@@ -4,138 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diogo Pianista - A Arte da Música</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Diogo Pianista - Música para Seus Momentos</title>
 
-    <link rel="preload" href="fundo.jpeg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="overflow-x-hidden">
-    <div id="loading-overlay" class="loading-overlay">
-        <div class="spinner"></div>
-    </div>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#sobre" class="logo nav-link">Diogo Pianista</a>
+            <ul>
+                <li><a href="#sobre" class="nav-link">Sobre Mim</a></li>
+                <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section id="splash-screen" class="splash-screen-section">
-        <div class="splash-screen-bg" style="background-image: url('fundo.jpeg');"></div>
-        <div id="darken-overlay" class="darken-overlay"></div>
-        <div class="splash-screen-content">
-            <h1 class="hero-quote" id="chopin-quote"> "Põe tua alma nisso, toque da maneira que sentes a música"
-            </h1>
-            <p class="hero-author">
-                — Frédéric Chopin
-            </p>
-            <button id="discover-button" class="discover-button">Ver Site <i class="fas fa-chevron-right"></i></button>
-        </div>
+    <section id="parallax-banner" class="content-section">
     </section>
 
-    <nav id="main-nav" class="main-nav">
-        <div class="container mx-auto flex items-center justify-between">
-            <a href="#" class="logo">Diogo Pianista</a>
-            <ul class="nav-links">
-                <li><a href="#" class="nav-item active" data-section="about-me">Sobre</a></li>
-                <li><a href="#" class="nav-item" data-section="services">Serviços</a></li>
-                <li><a href="#" class="nav-item" data-section="portfolio">Portfólio</a></li>
-                <li><a href="#" class="nav-item" data-section="contact">Contato</a></li>
-            </ul>
-            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
-                <i class="fas fa-bars"></i>
+    <main>
+        <section id="sobre" class="content-section">
+            <div class="container section-padding">
+                <h2>Sobre Mim</h2>
+                <div class="sobre-mim-content">
+                    <div class="sobre-mim-texto">
+                        <h3>Olá, sou Diogo Ladislau Pedro</h3>
+                        <p>
+                            Tenho 23 anos e a música é a minha vida, em suas diversas formas.
+                            Sou formado em Música e minha experiência como pianista abrange desde a atuação na
+                            Orquestra Harmonia Celeste de Criciúma (SC), onde toco desde os 14 anos,
+                            e no Coral AD Criciúma. Com o Vintage Piano, tenho a oportunidade de tecer
+                            melodias que carregam os sonhos e a alegria de cerimônias de casamento.
+                            A paixão por compartilhar conhecimento me acompanha desde cedo, atuando
+                            como professor de música desde os 13 anos.
+                        </p>
+                        <div class="sobre-mim-botoes">
+                            <a href="https://wa.me/5548992183310?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site%21"
+                                target="_blank" class="btn btn-primary">WhatsApp</a>
+                            <a href="#servicos" class="btn btn-secondary section-trigger-button">Ver Serviços</a>
+                        </div>
+                    </div>
+                    <div class="sobre-mim-imagem">
+                        <img src="" alt="Diogo Ladislau Pedro">
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <section id="servicos" class="content-section">
+            <div class="container section-padding">
+                <h2>Serviços</h2>
+                <div class="servicos-tabs">
+                    <button class="tab-button active" data-tab="teoria">Teoria Musical</button>
+                    <button class="tab-button" data-tab="aulas">Aulas Instrumentais</button>
+                    <button class="tab-button" data-tab="eventos">Casamentos/Eventos</button>
+                </div>
+                <div class="servicos-content">
+                    <div id="teoria" class="tab-content active">
+                        <h3>Teoria Musical Completa</h3>
+                        <p>Aulas teóricas abrangentes para todos os níveis, desde o básico até o avançado. Entenda a
+                            estrutura da música, harmonia, melodia e ritmo para aprimorar sua performance e composição.
+                        </p>
+                    </div>
+                    <div id="aulas" class="tab-content">
+                        <h3>Aulas Instrumentais (Foco em Piano)</h3>
+                        <p>Aulas práticas de piano personalizadas para suas metas e estilo. Desenvolva técnica,
+                            repertório e expressividade musical com acompanhamento individualizado.</p>
+                    </div>
+                    <div id="eventos" class="tab-content">
+                        <h3>Música para Casamentos e Eventos</h3>
+                        <p>Com o projeto "Vintage Piano" ou formações personalizadas, levo a trilha sonora perfeita para
+                            seu casamento, recepção ou evento corporativo. Crio atmosferas únicas com um repertório que
+                            vai do clássico ao popular.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="content-section">
+            <div class="container section-padding">
+                <h2>Entre em Contato</h2>
+                <p class="intro-contato">Vamos conversar sobre como posso levar a música ideal para você!</p>
+                <div class="contato-info">
+                    <div class="contato-item">
+                        <h4>Telefone</h4>
+                        <p><a href="tel:+5548992183310">(48) 99218-3310</a></p>
+                    </div>
+                    <div class="contato-item">
+                        <h4>WhatsApp</h4>
+                        <p><a href="https://wa.me/5548992183310?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site%21"
+                                target="_blank">Iniciar Conversa</a></p>
+                    </div>
+                    <div class="contato-item">
+                        <h4>Instagram</h4>
+                        <p><a href="https://www.instagram.com/diogopiano_?igsh=M29yaHl2YnlpcDR5"
+                                target="_blank">@diogopiano_</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Diogo Pianista. Todos os direitos reservados.</p>
         </div>
-        <ul class="mobile-menu-dropdown" id="mobile-menu">
-            <li><a href="#" class="mobile-nav-item" data-section="about-me">Sobre</a></li>
-            <li><a href="#" class="mobile-nav-item" data-section="services">Serviços</a></li>
-            <li><a href="#" class="mobile-nav-item" data-section="portfolio">Portfólio</a></li>
-            <li><a href="#" class="mobile-nav-item" data-section="contact">Contato</a></li>
-        </ul>
-    </nav>
+    </footer>
 
-    <div id="site-content" class="site-content">
-        <main>
-            <section id="about-me" class="content-section about-me-section">
-                <div class="container mx-auto text-center">
-                    <h2 class="section-title">Sobre Diogo</h2>
-                    <p class="section-subtitle">Minha jornada na música e paixão pelo piano.</p>
-                    <div class="about-grid">
-                        <div class="about-image-container">
-                            <img src="perfil.jpeg" alt="Diogo Pianista" class="about-image">
-                        </div>
-                        <div class="about-text">
-                            <h1>AEEEE GARAAAAAAI, FUNFOU</h1>
-                            
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="services" class="content-section services-section">
-                <div class="container mx-auto text-center">
-                    <h2 class="section-title">Meus Serviços</h2>
-                    <p class="section-subtitle">Oferecendo experiências musicais personalizadas.</p>
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <i class="fas fa-music service-icon"></i>
-                            <h3>Performance em Eventos</h3>
-                            <p>Música ao vivo para casamentos, jantares, eventos corporativos e mais, com repertório
-                                adaptável ao seu gosto.</p>
-                        </div>
-                        <div class="service-card">
-                            <i class="fas fa-chalkboard-teacher service-icon"></i>
-                            <h3>Aulas de Piano</h3>
-                            <p>Aulas particulares para todos os níveis, do iniciante ao avançado, presenciais ou online.
-                            </p>
-                        </div>
-                        <div class="service-card">
-                            <i class="fas fa-headset service-icon"></i>
-                            <h3>Consultoria Musical</h3>
-                            <p>Orientação para escolha de repertório, sonorização e planejamento musical para seu
-                                evento.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="portfolio" class="content-section portfolio-section">
-                <div class="container mx-auto text-center">
-                    <h2 class="section-title">Portfólio</h2>
-                    <p class="section-subtitle">Uma amostra do meu trabalho e paixão.</p>
-                    <div class="portfolio-gallery">
-                        <div class="portfolio-item">
-                            <img src="portfolio1.jpeg" alt="Performance em Casamento" class="portfolio-image">
-                            <div class="portfolio-overlay">
-                                <h4>Casamento Elegante</h4>
-                                <p>Repertório clássico para cerimônia inesquecível.</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="portfolio2.jpeg" alt="Aula de Piano" class="portfolio-image">
-                            <div class="portfolio-overlay">
-                                <h4>Aulas Particulares</h4>
-                                <p>Alunos de todas as idades e níveis.</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="portfolio3.jpeg" alt="Evento Corporativo" class="portfolio-image">
-                            <div class="portfolio-overlay">
-                                <h4>Música Corporativa</h4>
-                                <p>Jazz e lounge para eventos empresariais.</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="portfolio4.jpeg" alt="Estúdio de Gravação" class="portfolio-image">
-                            <div class="portfolio-overlay">
-                                <h4>Sessão de Estúdio</h4>
-                                <p>Gravação de trilhas sonoras originais.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
     <script src="script.js"></script>
 </body>
 

@@ -1,148 +1,114 @@
-// script.js
+document.addEventListener('DOMContentLoaded', function () {
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loadingOverlay = document.getElementById('loading-overlay');
-    const splashScreen = document.getElementById('splash-screen');
-    const chopinQuote = document.getElementById('chopin-quote');
-    const discoverButton = document.getElementById('discover-button');
-    const siteContent = document.getElementById('site-content');
-    const mainNav = document.getElementById('main-nav');
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileMenuDropdown = document.getElementById('mobile-menu');
-    const navItems = document.querySelectorAll('.main-nav .nav-item, .mobile-menu-dropdown .mobile-nav-item');
-    const sections = document.querySelectorAll('.content-section');
-    const currentYearSpan = document.getElementById('current-year');
-    const darkenOverlay = document.getElementById('darken-overlay');
-
-    // Define o ano atual no rodapé (se o elemento existir)
+    // Atualiza o ano no rodapé
+    const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- Lógica da Splash Screen ---
+    const contentSections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sectionTriggerButtons = document.querySelectorAll('.section-trigger-button');
+    const parallaxBanner = document.getElementById('parallax-banner');
+    const header = document.querySelector('header');
 
-    // Garante que a splash screen é exibida e o conteúdo principal/navbar estão ocultos ao carregar
-    splashScreen.style.display = 'flex';
-    siteContent.classList.add('hidden-content'); // Esconde o conteúdo principal inicialmente
-    mainNav.style.opacity = '0';
-    mainNav.style.visibility = 'hidden';
+    function showSection(targetId, performAutoScroll = false) {
+        const isAboutTarget = (targetId === 'sobre');
 
-    // Oculta o overlay de carregamento após a página carregar
-    window.addEventListener('load', () => {
-        loadingOverlay.classList.add('fade-out');
-        setTimeout(() => {
-            loadingOverlay.style.display = 'none';
-            // REMOVIDO DAQUI: darkenOverlay.classList.add('active-darken');
-            // A classe 'active-darken' será adicionada APENAS no clique do botão.
-        }, 500); // Tempo para o fade-out do loading overlay
-    });
+        // Controla visibilidade do parallax banner
+        if (isAboutTarget) {
+            parallaxBanner.classList.add('visible-section');
+        } else {
+            parallaxBanner.classList.remove('visible-section');
+        }
 
-    // Event listener para o botão de descoberta
-    if (discoverButton) {
-        discoverButton.addEventListener('click', () => {
-            // AQUI: Adiciona a classe 'active-darken' APENAS QUANDO O BOTÃO É CLICADO
-            darkenOverlay.classList.add('active-darken');
-
-            // Adiciona a classe que faz o zoom-in e blur-out na splash screen
-            splashScreen.classList.add('zoom-in-blur-out');
-
-            // Delay para permitir a animação da splash screen antes de esconder e mostrar o conteúdo
-            setTimeout(() => {
-                splashScreen.style.display = 'none'; // Esconde a splash screen completamente
-                // Se o overlay já escureceu, ao esconder a splash screen, ele também some
-                // Não precisamos remover 'active-darken' aqui, pois a splash screen toda some
-                // splashScreen.classList.remove('active-darken'); // Esta linha pode ser removida ou mantida, não fará diferença visível
-
-                // Mostra o conteúdo principal e a navbar com a transição
-                siteContent.classList.remove('hidden-content');
-                siteContent.classList.add('show-content'); // Ativa a transição de entrada do site-content
-                mainNav.style.opacity = '1';
-                mainNav.style.visibility = 'visible'; // Torna a navbar visível
-
-                // Lógica para ativar o link da navbar para a primeira seção visível (normalmente "Sobre Diogo")
-                const aboutMeNavLink = document.querySelector('.nav-item[data-section="about-me"]');
-                if (aboutMeNavLink) {
-                    navItems.forEach(item => item.classList.remove('active')); // Remove de todos
-                    aboutMeNavLink.classList.add('active'); // Ativa a seção "Sobre Diogo"
+        // Controla visibilidade das seções principais em <main>
+        contentSections.forEach(section => {
+            if (section.id !== 'parallax-banner') { // Não mexer no parallax aqui, pois já foi tratado
+                if (section.id === targetId) {
+                    section.classList.add('visible-section');
+                } else {
+                    section.classList.remove('visible-section');
                 }
-
-            }, 1800); // Ajustado para 1.8s (1800ms) para sincronizar com a transição de 2s da splashScreen (dei uma margem)
-        });
-    }
-
-    // --- Lógica do Mobile Menu ---
-    if (mobileMenuToggle && mobileMenuDropdown) {
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuDropdown.classList.toggle('show');
-        });
-
-        mobileMenuDropdown.querySelectorAll('.mobile-nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                mobileMenuDropdown.classList.remove('show');
-            });
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!mobileMenuDropdown.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                mobileMenuDropdown.classList.remove('show');
             }
         });
-    }
 
-    // --- Lógica de Scroll e Navbar Ativação/Rolagem Suave ---
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
+        // Atualiza a classe 'active-link' nos links da navegação principal
+        navLinks.forEach(link => {
+            link.classList.remove('active-link');
+            const linkTarget = link.getAttribute('href').substring(1);
+            if (linkTarget === targetId) {
+                link.classList.add('active-link');
+            }
+        });
 
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
+        // Scroll automático
+        if (isAboutTarget && performAutoScroll) {
+            window.scrollTo(0, 0); // Garante que a página esteja no topo antes do timeout
 
-            const targetSectionId = item.dataset.section;
-            const targetSection = document.getElementById(targetSectionId);
+            setTimeout(() => {
+                const secaoSobre = document.getElementById('sobre');
+                if (secaoSobre && header) {
+                    const headerHeight = header.offsetHeight;
+                    const secaoSobreTop = secaoSobre.offsetTop; // Posição do topo da seção 'sobre'
 
-            if (targetSection) {
-                const navHeight = mainNav.offsetHeight;
-                const sectionTop = targetSection.getBoundingClientRect().top + window.scrollY - navHeight;
+                    const scrollToPosition = secaoSobreTop - headerHeight;
+
+                    window.scrollTo({
+                        top: scrollToPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 2500); // 2.5 segundos
+        } else if (!isAboutTarget) { // Scroll para o topo de outras seções ao navegar
+            const targetSectionElement = document.getElementById(targetId);
+            if (targetSectionElement && header) {
+                const headerHeight = header.offsetHeight;
+                const sectionTop = targetSectionElement.offsetTop;
                 window.scrollTo({
-                    top: sectionTop,
+                    top: sectionTop - headerHeight,
                     behavior: 'smooth'
                 });
             }
+        }
+    }
 
-            if (mobileMenuDropdown.classList.contains('show')) {
-                mobileMenuDropdown.classList.remove('show');
-            }
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            showSection(targetId, false); // performAutoScroll é false para cliques normais
         });
     });
 
-    // Observer para animar as seções conforme elas entram na viewport
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2
-    };
+    sectionTriggerButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            showSection(targetId, false);
+        });
+    });
 
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
+    // Estado inicial: Mostrar parallax e a seção "Sobre Mim" E EXECUTAR O SCROLL AUTOMÁTICO
+    showSection('sobre', true);
 
-                const currentActiveSectionId = entry.target.id;
-                navItems.forEach(item => {
-                    if (item.dataset.section === currentActiveSectionId) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
+    // Funcionalidade das Abas da Seção Serviços
+    const tabButtons = document.querySelectorAll('.servicos-tabs .tab-button');
+    const tabContents = document.querySelectorAll('.servicos-content .tab-content');
 
-            } else {
-                 entry.target.classList.remove('in-view');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (document.getElementById('servicos').classList.contains('visible-section')) {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                button.classList.add('active');
+                const targetTabId = button.getAttribute('data-tab');
+                const targetContent = document.getElementById(targetTabId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
             }
         });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        sectionObserver.observe(section);
     });
 });
