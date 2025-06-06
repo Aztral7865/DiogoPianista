@@ -164,4 +164,74 @@ function initializeSiteLogic() {
         });
     }
 
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    if (carouselContainer) {
+        const track = carouselContainer.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = carouselContainer.querySelector('.carousel-button.next');
+        const prevButton = carouselContainer.querySelector('.carousel-button.prev');
+
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+
+        firstClone.classList.add('clone');
+        lastClone.classList.add('clone');
+
+        track.appendChild(firstClone);
+        track.insertBefore(lastClone, slides[0]);
+
+        const allSlides = Array.from(track.children);
+        const slideWidth = slides[0].getBoundingClientRect().width;
+
+        let currentIndex = 1;
+        let slideInterval;
+
+        const setPositionWithoutTransition = () => {
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        };
+
+        setPositionWithoutTransition();
+
+        setTimeout(() => {
+            track.style.transition = 'transform 0.6s ease-in-out';
+        }, 50);
+
+        track.addEventListener('transitionend', () => {
+            if (allSlides[currentIndex].classList.contains('clone') && currentIndex > 1) {
+                currentIndex = 1;
+                setPositionWithoutTransition();
+            }
+            if (allSlides[currentIndex].classList.contains('clone') && currentIndex < 1) {
+                currentIndex = slides.length;
+                setPositionWithoutTransition();
+            }
+        });
+
+        const moveToNext = () => {
+            currentIndex++;
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            track.style.transition = 'transform 0.6s ease-in-out';
+        };
+
+        const moveToPrev = () => {
+            currentIndex--;
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            track.style.transition = 'transform 0.6s ease-in-out';
+        };
+
+        nextButton.addEventListener('click', moveToNext);
+        prevButton.addEventListener('click', moveToPrev);
+
+        const startAutoplay = () => {
+            slideInterval = setInterval(moveToNext, 5000); //segundos pah trocar a ftinho
+        };
+
+        carouselContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        carouselContainer.addEventListener('mouseleave', startAutoplay);
+
+        startAutoplay();
+    }
+
 }
