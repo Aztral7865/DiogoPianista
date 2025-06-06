@@ -8,232 +8,257 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="splash.css">
 
+    <link rel="preload" href="imagens/fundo.jpeg" as="image">
 </head>
 
 <body>
-    <header>
-        <nav class="container">
-            <a href="#sobre" class="logo nav-link">Diogo Pianista</a>
-            <ul>
-                <li><a href="#sobre" class="nav-link">Sobre Mim</a></li>
-                <li><a href="#servicos" class="nav-link">Serviços</a></li>
-                <li><a href="#contato" class="nav-link">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="parallax-banner" class="content-section">
+    <section id="splash-screen" class="splash-screen-section">
+        <div class="splash-screen-bg" style="background-image: url('imagens/fundo.jpeg');"></div>
+        <div class="splash-screen-content">
+            <h1 class="hero-quote">
+                "Põe tua alma nisso, toque da maneira que sentes a música"
+            </h1>
+            <p class="hero-author">
+                – Frédéric Chopin
+            </p>
+            <button id="discover-button" class="discover-button">
+                Ver Site <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </section>
 
-    <main>
-        <section id="sobre" class="content-section">
-            <div class="container section-padding">
-                <h2>Sobre Mim</h2>
-                <div class="sobre-mim-content">
-                    <div class="sobre-mim-texto">
-                        <h3>Olá, sou Diogo Ladislau Pedro</h3>
-                        <p>
-                            Tenho 23 anos e a música é a minha vida, em suas diversas formas.
-                            Sou formado em Música e minha experiência como pianista abrange desde a atuação na
-                            Orquestra Harmonia Celeste de Criciúma (SC), onde toco desde os 14 anos,
-                            e no Coral AD Criciúma. Com o Vintage Piano, tenho a oportunidade de tecer
-                            melodias que carregam os sonhos e a alegria de cerimônias de casamento.
-                            A paixão por compartilhar conhecimento me acompanha desde cedo, atuando
-                            como professor de música desde os 13 anos.
-                        </p>
-                        <div class="sobre-mim-botoes">
-                            <a href="https://wa.me/5548992183310?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site%21"
-                                target="_blank" class="btn btn-primary">WhatsApp</a>
-                            <a href="#servicos" class="btn btn-secondary section-trigger-button">Ver Serviços</a>
-                        </div>
-                    </div>
-                    <div class="sobre-mim-imagem">
-                        <img src="imagens/ftDiogo2.PNG" alt="Diogo Ladislau Pedro">
-                    </div>
-                </div>
-            </div>
+    <template id="conteudo-principal-template">
+        <header>
+            <nav class="container">
+                <a href="#sobre" class="logo nav-link">
+                    <img src="imagens/iconFav.png" alt="Logo Diogo Pianista" class="logo-imagem">
+                    <span>Diogo Pianista</span>
+                </a>
+                <ul>
+                    <li><a href="#sobre" class="nav-link">Sobre Mim</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="parallax-banner" class="content-section">
         </section>
 
-        <section id="servicos" class="content-section">
-            <div class="container section-padding">
-                <h2>Serviços</h2>
-                <p class="secao-introducao">
-                    Descubra como a música pode enriquecer sua vida ou tornar seu evento inesquecível. Ofereço uma gama
-                    de serviços personalizados, desde o aprendizado fundamental da teoria musical e prática instrumental
-                    até a criação de atmosferas sonoras únicas para seus momentos mais especiais.
-                </p>
-                <div class="servicos-tabs">
-                    <button class="tab-button active" data-tab="teoria">Teoria Musical</button>
-                    <button class="tab-button" data-tab="aulas">Aulas Instrumentais</button>
-                    <button class="tab-button" data-tab="eventos">Casamentos/Eventos</button>
-                </div>
-                <div class="servicos-content">
-                    <div id="teoria" class="tab-content active">
-                        <div class="servico-item-layout">
-                            <div class="servico-imagem">
-                                <img src="imagens/teoriaMusical.jpg" alt="Teoria Musical">
-                            </div>
-                            <div class="servico-descricao">
-                                <h3>Teoria Musical Completa</h3>
-                                <p>Vá além das notas! A Teoria Musical fornece as ferramentas práticas para você
-                                    entender como a música funciona. Compreenda a construção de acordes, as progressões
-                                    harmônicas, a relação entre melodia e harmonia, e como aplicar esse conhecimento ao
-                                    seu instrumento, seja ele o piano ou qualquer outro. Essas aulas são ideais para
-                                    quem deseja improvisar com mais confiança, analisar peças musicais e desenvolver uma
-                                    musicalidade mais completa.</p>
-                                <p class="servico-cta"><a href="#contato"
-                                        class="link-discreto section-trigger-button">Interessado? Fale comigo!</a></p>
+        <main>
+            <section id="sobre" class="content-section">
+                <div class="container section-padding">
+                    <h2>Sobre Mim</h2>
+                    <div class="sobre-mim-content">
+                        <div class="sobre-mim-texto">
+                            <h3>Olá, sou Diogo Ladislau Pedro</h3>
+                            <p>
+                                Tenho 23 anos e a música é a minha vida, em suas diversas formas.
+                                Sou formado em Música e minha experiência como pianista abrange desde a atuação na
+                                Orquestra Harmonia Celeste de Criciúma (SC), onde toco desde os 14 anos,
+                                e no Coral AD Criciúma. Com o Vintage Piano, tenho a oportunidade de tecer
+                                melodias que carregam os sonhos e a alegria de cerimônias de casamento.
+                                A paixão por compartilhar conhecimento me acompanha desde cedo, atuando
+                                como professor de música desde os 13 anos.
+                            </p>
+                            <div class="sobre-mim-botoes">
+                                <a href="https://wa.me/5548992183310?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site%21"
+                                    target="_blank" rel="noopener noreferrer" class="btn btn-primary">WhatsApp</a>
+                                <a href="#servicos" class="btn btn-secondary section-trigger-button">Ver Serviços</a>
                             </div>
                         </div>
-                    </div>
-                    <div id="aulas" class="tab-content">
-                        <div class="servico-item-layout">
-                            <div class="servico-imagem">
-                                <img src="imagens/aulaInstrumental.jpeg" alt="Aulas Instrumentais">
-                            </div>
-                            <div class="servico-descricao">
-                                <h3>Aulas Instrumentais (Foco em Piano)</h3>
-                                <p>Aprenda a tocar do seu jeito! As aulas de instrumento são estruturadas para atender
-                                    às suas necessidades e paixões musicais. Seja qual for seu nível ou estilo
-                                    preferido, você receberá orientação especializada e um plano de aprendizado eficaz
-                                    para alcançar seus objetivos musicais, desenvolvendo técnica, musicalidade e
-                                    confiança ao tocar.</p>
-                                <p class="servico-cta"><a href="#contato"
-                                        class="link-discreto section-trigger-button">Vamos começar? Entre em
-                                        contato!</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="eventos" class="tab-content">
-                        <div class="servico-item-layout">
-                            <div class="servico-imagem">
-                                <img src="imagens/ftDiogo2.PNG" alt="Música para Casamentos e Eventos">
-                            </div>
-                            <div class="servico-descricao">
-                                <h3>Música para Casamentos e Eventos</h3>
-                                <p>A música é a alma da celebração. Para o seu casamento, ofereço um serviço completo de
-                                    musicalização, que abrange desde a escolha do repertório ideal para a cerimônia até
-                                    a animação da recepção. Conte com a emoção do piano para tornar cada instante ainda
-                                    mais significativo e especial.</p>
-                                <p class="servico-cta"><a href="#contato"
-                                        class="link-discreto section-trigger-button">Solicite um orçamento!</a></p>
-                            </div>
+                        <div class="sobre-mim-imagem">
+                            <img src="imagens/ftDiogo2.PNG" alt="Diogo Ladislau Pedro">
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <section id="servicos" class="content-section">
+                <div class="container section-padding">
+                    <h2>Serviços</h2>
+                    <p class="secao-introducao">
+                        Descubra como a música pode enriquecer sua vida ou tornar seu evento inesquecível. Ofereço uma
+                        gama
+                        de serviços personalizados, desde o aprendizado fundamental da teoria musical e prática
+                        instrumental
+                        até a criação de atmosferas sonoras únicas para seus momentos mais especiais.
+                    </p>
+                    <div class="servicos-tabs">
+                        <button class="tab-button active" data-tab="teoria">Teoria Musical</button>
+                        <button class="tab-button" data-tab="aulas">Aulas Instrumentais</button>
+                        <button class="tab-button" data-tab="eventos">Casamentos/Eventos</button>
+                    </div>
+                    <div class="servicos-content">
+                        <div id="teoria" class="tab-content active">
+                            <div class="servico-item-layout">
+                                <div class="servico-imagem">
+                                    <img src="imagens/teoriaMusical.jpg" alt="Teoria Musical">
+                                </div>
+                                <div class="servico-descricao">
+                                    <h3>Teoria Musical Completa</h3>
+                                    <p>Vá além das notas! A Teoria Musical fornece as ferramentas práticas para você
+                                        entender como a música funciona. Compreenda a construção de acordes, as
+                                        progressões
+                                        harmônicas, a relação entre melodia e harmonia, e como aplicar esse conhecimento
+                                        ao
+                                        seu instrumento, seja ele o piano ou qualquer outro. Essas aulas são ideais para
+                                        quem deseja improvisar com mais confiança, analisar peças musicais e desenvolver
+                                        uma
+                                        musicalidade mais completa.</p>
+                                    <p class="servico-cta"><a href="#contato"
+                                            class="link-discreto section-trigger-button">Interessado? Fale comigo!</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="aulas" class="tab-content">
+                            <div class="servico-item-layout">
+                                <div class="servico-imagem">
+                                    <img src="imagens/aulaInstrumental.jpeg" alt="Aulas Instrumentais">
+                                </div>
+                                <div class="servico-descricao">
+                                    <h3>Aulas Instrumentais (Foco em Piano)</h3>
+                                    <p>Aprenda a tocar do seu jeito! As aulas de instrumento são estruturadas para
+                                        atender
+                                        às suas necessidades e paixões musicais. Seja qual for seu nível ou estilo
+                                        preferido, você receberá orientação especializada e um plano de aprendizado
+                                        eficaz
+                                        para alcançar seus objetivos musicais, desenvolvendo técnica, musicalidade e
+                                        confiança ao tocar.</p>
+                                    <p class="servico-cta"><a href="#contato"
+                                            class="link-discreto section-trigger-button">Vamos começar? Entre em
+                                            contato!</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="eventos" class="tab-content">
+                            <div class="servico-item-layout">
+                                <div class="servico-imagem">
+                                    <img src="imagens/ftDiogo2.PNG" alt="Música para Casamentos e Eventos">
+                                </div>
+                                <div class="servico-descricao">
+                                    <h3>Música para Casamentos e Eventos</h3>
+                                    <p>A música é a alma da celebração. Para o seu casamento, ofereço um serviço
+                                        completo de
+                                        musicalização, que abrange desde a escolha do repertório ideal para a cerimônia
+                                        até
+                                        a animação da recepção. Conte com a emoção do piano para tornar cada instante
+                                        ainda
+                                        mais significativo e especial.</p>
+                                    <p class="servico-cta"><a href="#contato"
+                                            class="link-discreto section-trigger-button">Solicite um orçamento!</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contato" class="content-section">
+                <div class="container section-padding">
+                    <h2>Entre em Contato</h2>
+                    <p class="secao-introducao">
+                        Adoraria ouvir sobre seus projetos musicais ou como posso ajudar você a trilhar seu caminho na
+                        música. Seja para aulas, performances em eventos ou simplesmente para trocar uma ideia, estou à
+                        disposição!
+                    </p>
+                    <div class="contato-info">
+                        <a href="tel:+5548992183310" class="contato-item telefone-item">
+                            <div class="contato-icone icone-telefone">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.37 21 3 14.63 3 6c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                                </svg>
+                            </div>
+                            <h4>Telefone</h4>
+                            <p>(48) 99218-3310</p>
+                        </a>
+                        <a href="https://wa.me/5548992183310?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site%21"
+                            target="_blank" rel="noopener noreferrer" class="contato-item whatsapp-item">
+                            <div class="contato-icone icone-whatsapp">
+                                <svg viewBox="0 0 16 16" class="bi bi-whatsapp" fill="currentColor" height="24"
+                                    width="24" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h4>WhatsApp</h4>
+                            <p>Iniciar Conversa</p>
+                        </a>
+                        <a href="https://www.instagram.com/diogopiano_?igsh=M29yaHl2YnlpcDR5" target="_blank"
+                            rel="noopener noreferrer" class="contato-item instagram-item">
+                            <div class="contato-icone icone-instagram">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8c1.99 0 3.6-1.61 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+                                </svg>
+                            </div>
+                            <h4>Instagram</h4>
+                            <p>@diogopiano_</p>
+                        </a>
+                    </div>
+                    <div class="formulario-contato-container">
+                        <h3>Envie uma Mensagem Direta</h3>
+                        <form id="formContato" action="#" method="POST">
+                            <div><label for="nome">Nome:</label><input type="text" id="nome" name="nome" required></div>
+                            <div><label for="email">Email:</label><input type="email" id="email" name="email" required>
+                            </div>
+                            <div><label for="assunto">Assunto:</label><input type="text" id="assunto" name="assunto">
+                            </div>
+                            <div><label for="mensagem">Mensagem:</label><textarea id="mensagem" name="mensagem" rows="5"
+                                    required></textarea></div>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                    <div class="faq-container">
+                        <h3>Perguntas Frequentes</h3>
+                        <div class="faq-item">
+                            <h4>Como funcionam as aulas de piano?</h4>
+                            <p>As aulas são personalizadas para seu nível e interesse, desde iniciantes até avançados,
+                                focando em técnica, teoria e repertório do seu gosto. Podemos explorar diversos estilos
+                                musicais!</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>Você toca em quais tipos de eventos?</h4>
+                            <p>Principalmente em cerimônias de casamento, onde a música de piano cria uma atmosfera
+                                emocionante e sofisticada. Também estou disponível para recepções, jantares, eventos
+                                corporativos e outras ocasiões especiais.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>É possível solicitar músicas específicas para um evento?</h4>
+                            <p>Com certeza! Adoro trabalhar em conjunto com os clientes para montar um repertório que
+                                seja a trilha sonora perfeita para seu momento. Podemos adaptar arranjos e incluir suas
+                                canções favoritas.</p>
+                        </div>
+                    </div>
+                    <p class="secao-encerramento">
+                        Aguardo seu contato para criarmos juntos experiências musicais memoráveis!
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; <span id="currentYear"></span> Diogo Pianista. Todos os direitos reservados.</p>
             </div>
-        </section>
+        </footer>
+    </template>
 
-        <section id="contato" class="content-section">
-            <div class="container section-padding">
-                <h2>Entre em Contato</h2>
-                <p class="secao-introducao">
-                    Adoraria ouvir sobre seus projetos musicais ou como posso ajudar você a trilhar seu caminho na
-                    música. Seja para aulas, performances em eventos ou simplesmente para trocar uma ideia, estou à
-                    disposição!
-                </p>
-                <div class="contato-info">
-                    <a href="tel:+5548992183310" class="contato-item telefone-item">
-                        <div class="contato-icone icone-telefone">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.37 21 3 14.63 3 6c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                            </svg>
-                        </div>
-                        <h4>Telefone</h4>
-                        <p>(48) 99218-3310</p>
-                    </a>
+    <div id="site-content-wrapper"></div>
 
-                    <a href="https://wa.me/5548992183310?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site%21"
-                        target="_blank" class="contato-item whatsapp-item">
-                        <div class="contato-icone icone-whatsapp">
-                            <svg viewBox="0 0 16 16" class="bi bi-whatsapp" fill="currentColor" height="24" width="24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h4>WhatsApp</h4>
-                        <p>Iniciar Conversa</p>
-                    </a>
-
-                    <a href="https://www.instagram.com/diogopiano_?igsh=M29yaHl2YnlpcDR5" target="_blank"
-                        class="contato-item instagram-item">
-                        <div class="contato-icone icone-instagram">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8c1.99 0 3.6-1.61 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
-                            </svg>
-                        </div>
-                        <h4>Instagram</h4>
-                        <p>@diogopiano_</p>
-                    </a>
-                </div>
-                <div class="formulario-contato-container">
-                    <h3>Envie uma Mensagem Direta</h3>
-                    <form id="formContato" action="#" method="POST">
-                        <div>
-                            <label for="nome">Nome:</label>
-                            <input type="text" id="nome" name="nome" required>
-                        </div>
-                        <div>
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div>
-                            <label for="assunto">Assunto:</label>
-                            <input type="text" id="assunto" name="assunto">
-                        </div>
-                        <div>
-                            <label for="mensagem">Mensagem:</label>
-                            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-                    </form>
-                </div>
-
-                <div class="faq-container">
-                    <h3>Perguntas Frequentes</h3>
-                    <div class="faq-item">
-                        <h4>Como funcionam as aulas de piano?</h4>
-                        <p>As aulas são personalizadas para seu nível e interesse, desde iniciantes até avançados,
-                            focando em técnica, teoria e repertório do seu gosto. Podemos explorar diversos estilos
-                            musicais!</p>
-                    </div>
-                    <div class="faq-item">
-                        <h4>Você toca em quais tipos de eventos?</h4>
-                        <p>Principalmente em cerimônias de casamento, onde a música de piano cria uma atmosfera
-                            emocionante e sofisticada. Também estou disponível para recepções, jantares, eventos
-                            corporativos e outras ocasiões especiais.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h4>É possível solicitar músicas específicas para um evento?</h4>
-                        <p>Com certeza! Adoro trabalhar em conjunto com os clientes para montar um repertório que seja a
-                            trilha sonora perfeita para seu momento. Podemos adaptar arranjos e incluir suas canções
-                            favoritas.</p>
-                    </div>
-                </div>
-
-                <p class="secao-encerramento">
-                    Aguardo seu contato para criarmos juntos experiências musicais memoráveis!
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="currentYear"></span> Diogo Pianista. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
