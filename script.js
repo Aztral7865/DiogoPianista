@@ -1,6 +1,42 @@
-document.addEventListener('DOMContentLoaded', function () {
 
-    // Atualiza o ano no rodapé
+document.addEventListener('DOMContentLoaded', () => {
+
+    const discoverButton = document.getElementById('discover-button');
+    const splashScreen = document.getElementById('splash-screen');
+    const siteWrapper = document.getElementById('site-content-wrapper');
+
+    function activateMainContent() {
+        const template = document.getElementById('conteudo-principal-template');
+        if (template) {
+            siteWrapper.classList.add('conteudo-esmaecido');
+
+            const content = template.content.cloneNode(true);
+            siteWrapper.appendChild(content);
+
+            setTimeout(() => {
+                siteWrapper.classList.remove('conteudo-esmaecido');
+            }, 50);
+
+            //Ativa a lógica do site (menus, abas, etc.) como sempre.
+            initializeSiteLogic();
+        }
+    }
+
+    // Evento de clique no botão da splash screen
+    if (discoverButton) {
+        discoverButton.addEventListener('click', () => {
+            splashScreen.classList.add('efeito-camera-zoom');
+
+            setTimeout(() => {
+                activateMainContent();
+            }, 1900); // Espera 1.9 segundos
+
+        }, { once: true }); // O { once: true } garante que o clique só funcione uma vez.
+    }
+});
+
+
+function initializeSiteLogic() {
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
@@ -15,16 +51,16 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSection(targetId, performAutoScroll = false) {
         const isAboutTarget = (targetId === 'sobre');
 
-        // Controla visibilidade do parallax banner
-        if (isAboutTarget) {
-            parallaxBanner.classList.add('visible-section');
-        } else {
-            parallaxBanner.classList.remove('visible-section');
+        if (parallaxBanner) {
+            if (isAboutTarget) {
+                parallaxBanner.classList.add('visible-section');
+            } else {
+                parallaxBanner.classList.remove('visible-section');
+            }
         }
 
-        // Controla visibilidade das seções principais em <main>
         contentSections.forEach(section => {
-            if (section.id !== 'parallax-banner') { // Não mexer no parallax aqui, pois já foi tratado
+            if (section.id !== 'parallax-banner') {
                 if (section.id === targetId) {
                     section.classList.add('visible-section');
                 } else {
@@ -33,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Atualiza a classe 'active-link' nos links da navegação principal
         navLinks.forEach(link => {
             link.classList.remove('active-link');
             const linkTarget = link.getAttribute('href').substring(1);
@@ -42,25 +77,22 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Scroll automático
         if (isAboutTarget && performAutoScroll) {
-            window.scrollTo(0, 0); // Garante que a página esteja no topo antes do timeout
+            window.scrollTo(0, 0);
 
             setTimeout(() => {
                 const secaoSobre = document.getElementById('sobre');
                 if (secaoSobre && header) {
                     const headerHeight = header.offsetHeight;
-                    const secaoSobreTop = secaoSobre.offsetTop; // Posição do topo da seção 'sobre'
-
+                    const secaoSobreTop = secaoSobre.offsetTop;
                     const scrollToPosition = secaoSobreTop - headerHeight;
-
                     window.scrollTo({
                         top: scrollToPosition,
                         behavior: 'smooth'
                     });
                 }
-            }, 1000); // 2.5 segundos
-        } else if (!isAboutTarget) { // Scroll para o topo de outras seções ao navegar
+            }, 1000);
+        } else if (!isAboutTarget) {
             const targetSectionElement = document.getElementById(targetId);
             if (targetSectionElement && header) {
                 const headerHeight = header.offsetHeight;
@@ -77,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
-            showSection(targetId, false); // performAutoScroll é false para cliques normais
+            showSection(targetId, false);
         });
     });
 
@@ -89,16 +121,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Estado inicial: Mostrar parallax e a seção "Sobre Mim" E EXECUTAR O SCROLL AUTOMÁTICO
     showSection('sobre', true);
 
-    // Funcionalidade das Abas da Seção Serviços
     const tabButtons = document.querySelectorAll('.servicos-tabs .tab-button');
     const tabContents = document.querySelectorAll('.servicos-content .tab-content');
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            if (document.getElementById('servicos').classList.contains('visible-section')) {
+            const servicosSection = document.getElementById('servicos');
+            if (servicosSection && servicosSection.classList.contains('visible-section')) {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
 
@@ -111,4 +142,26 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-});
+
+    const formContato = document.getElementById('formContato');
+
+    if (formContato) {
+        formContato.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const assunto = document.getElementById('assunto').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const numeroWhatsApp = '5548992183310';
+
+            const mensagemTemplate = `Olá! me chamo *${nome}*!\n\nGostaria de falar sobre: *${assunto}*.\n\n${mensagem}`;
+
+            const mensagemCodificada = encodeURIComponent(mensagemTemplate);
+
+            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+
+            window.open(linkWhatsApp, '_blank');
+        });
+    }
+
+}
