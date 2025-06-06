@@ -1,0 +1,210 @@
+/* splash.css */
+
+/* --- Variáveis CSS para Cores e Fontes --- */
+:root {
+    --primary-color: #333;
+    --accent-color: #007bff; /* Azul vibrante */
+    --accent-hover-color: #0056b3;
+    --secondary-accent-color: #6c757d;
+    --bg-light: #f8f9fa;
+    --bg-dark: #212529;
+    --text-dark: #222;
+    --text-light: #fff; /* Usado na hero section e nav */
+    --nav-bg-color: rgba(34, 34, 34, 0.85); /* Fundo da nav mais opaco */
+    --nav-link-color: rgba(255, 255, 255, 0.7); /* Cor dos links da nav */
+    --nav-link-hover-color: #ffffff; /* Cor dos links da nav no hover */
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Open Sans', sans-serif;
+
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --shadow-strong: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estilos Globais e Reset --- */
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+/* --- SPLASH SCREEN (ESTADO INICIAL) --- */
+.splash-screen-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-light);
+    text-align: center;
+    z-index: 999;
+    
+    /* Estado inicial para a animação de saída */
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ======================================================= */
+/* NOVA ANIMAÇÃO DE SAÍDA: EFEITO "CÂMERA APROXIMANDO"      */
+/* ======================================================= */
+
+/* Esta classe aciona a animação na seção inteira */
+.splash-screen-section.efeito-camera-zoom {
+    /* A tela inteira aumenta de tamanho, simulando a câmera avançando */
+    transform: scale(2);
+    /* A tela desaparece (fade out) durante o zoom */
+    opacity: 0;
+    visibility: hidden;
+    /* Duração total da animação principal */
+    transition: transform 2s ease-in, opacity 2s ease-in, visibility 2s linear;
+}
+
+/* O autor e o botão desaparecem mais rápido para limpar a tela para o zoom */
+.splash-screen-section.efeito-camera-zoom .hero-author,
+.splash-screen-section.efeito-camera-zoom .discover-button {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+/* A frase principal não precisa de uma transição própria,
+   pois ela fará parte do zoom da seção inteira. */
+
+
+/* ======================================================= */
+/* FIM DO CÓDIGO DA ANIMAÇÃO                               */
+/* ======================================================= */
+
+
+.splash-screen-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    filter: brightness(0.4);
+}
+
+.splash-screen-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    padding: 0 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    margin-top: -80px;
+}
+
+.hero-quote {
+    font-family: var(--font-heading);
+    font-size: 3.8rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    color: white;
+    animation: fadeInDown 1.2s ease-out;
+}
+
+.hero-author {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 3rem;
+    animation: fadeInUp 1.2s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+.discover-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none;
+    animation: zoomIn 1s ease-out 0.6s forwards;
+    opacity: 0;
+    margin-top: 1rem;
+}
+
+.discover-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: translateY(-5px);
+}
+
+.discover-button i {
+    margin-left: 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* --- Animações de Entrada --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .hero-quote {
+        font-size: 2.8rem;
+    }
+    .hero-author {
+        font-size: 1.6rem;
+    }
+    .discover-button {
+        padding: 0.7rem 1.8rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-quote {
+        font-size: 2.2rem;
+    }
+    .hero-author {
+        font-size: 1.3rem;
+    }
+    .discover-button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
