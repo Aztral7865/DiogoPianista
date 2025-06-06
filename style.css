@@ -5,29 +5,20 @@
     box-sizing: border-box;
 }
 
-/* Variáveis de Cor Modernizadas (P&B e Cinzas) */
 :root {
     --cor-fundo-principal: #FFFFFF;
-    /* Branco */
     --cor-texto-principal: #212529;
-    /* Preto suave, moderno */
     --cor-fundo-secao-alternativa: #F8F9FA;
-    /* Cinza muito claro */
     --cor-texto-secundario: #6C757D;
-    /* Cinza médio para subtextos */
     --cor-acento-primario: #343A40;
-    /* Cinza escuro para elementos ativos/botões */
     --cor-acento-hover: #495057;
-    /* Cinza um pouco mais claro para hover */
     --cor-borda-sutil: #DEE2E6;
-    /* Cinza bem claro para bordas */
     --cor-branco: #FFFFFF;
-
     --sombra-padrao: 0 4px 12px rgba(0, 0, 0, 0.08);
-    /* Sombra sutil moderna */
     --border-radius-padrao: 8px;
-    /* Raio de borda padrão */
 }
+
+
 
 body {
     background-color: var(--cor-fundo-principal);
@@ -36,7 +27,14 @@ body {
     line-height: 1.7;
     font-weight: 400;
     overflow-x: hidden;
-    /* Prevenir scroll horizontal caso algo exceda */
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Lora', serif;
 }
 
 .container {
@@ -46,17 +44,9 @@ body {
 }
 
 .section-padding {
-    /*
-     * Define o espaçamento interno para as seções principais.
-     * O padding-top foi aumentado para 85px para garantir que o conteúdo da seção
-     * não seja sobreposto pelo cabeçalho fixo.
-     * O padding-bottom foi mantido em 70px.
-     */
     padding: 85px 0 70px 0;
-    /* padding: top right bottom left; */
 }
 
-/* Lógica de visibilidade das seções */
 .content-section {
     display: none;
 }
@@ -77,6 +67,19 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ======================================= */
+/* EFEITO FADE-IN (APARECER AOS POUCOS)    */
+/* ======================================= */
+
+#site-content-wrapper {
+    transition: opacity 1.5s ease-out;
+}
+
+#site-content-wrapper.conteudo-esmaecido {
+    opacity: 0;
+}
+
 
 /* Estilo para parágrafos introdutórios e de encerramento de seção */
 .secao-introducao,
@@ -117,15 +120,35 @@ header .container {
 }
 
 header .logo {
-    font-size: 1.6em;
-    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7em;
+    font-weight: 700;
     color: var(--cor-texto-principal);
     text-decoration: none;
-    transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 0;
+    transition: color 0.4s ease;
 }
 
 header .logo:hover {
-    color: var(--cor-acento-primario);
+    color: var(--cor-acento-hover);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo .logo-imagem {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.logo span {
+    display: block;
 }
 
 header nav ul {
@@ -168,14 +191,12 @@ header nav ul li a.nav-link.active-link {
     min-height: 65vh;
     width: 100%;
     background-image: url('imagens/ftDiogo2.PNG');
-    /* Verifique se este caminho está correto */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     filter: grayscale(100%);
     margin-top: 82px;
-    /* Altura aproximada do header, ajuste se necessário */
 }
 
 #parallax-banner.visible-section {
@@ -194,7 +215,6 @@ h2 {
 
 h3 {
     font-size: 1.5em;
-    /* Reduzido um pouco para consistência, pode ser ajustado */
     font-weight: 600;
     color: var(--cor-texto-principal);
     margin-bottom: 15px;
@@ -206,13 +226,11 @@ h3 {
     flex-wrap: wrap;
     gap: 40px;
     align-items: flex-start;
-    /* Alinha os itens no topo */
 }
 
 .sobre-mim-texto {
     flex: 1 1 55%;
     min-width: 300px;
-    /* Para melhor responsividade */
 }
 
 .sobre-mim-texto p {
@@ -224,7 +242,6 @@ h3 {
 .sobre-mim-imagem {
     flex: 1 1 40%;
     min-width: 300px;
-    /* Para melhor responsividade */
     text-align: center;
 }
 
@@ -238,11 +255,8 @@ h3 {
 .sobre-mim-botoes {
     margin-top: 20px;
     display: flex;
-    /* Para alinhar botões */
     gap: 15px;
-    /* Espaço entre botões */
     flex-wrap: wrap;
-    /* Para quebra de linha em telas menores */
 }
 
 /* Botões Modernizados */
@@ -333,7 +347,6 @@ h3 {
     border-radius: var(--border-radius-padrao);
     box-shadow: var(--sombra-padrao);
     animation: fadeInSection 0.5s ease-out;
-    /* Reutilizando animação de fade */
 }
 
 .tab-content.active {
@@ -343,24 +356,20 @@ h3 {
 .servico-item-layout {
     display: flex;
     align-items: stretch;
-    /* Faz com que a imagem e a descrição tenham a mesma altura */
     gap: 30px;
     flex-wrap: wrap;
-    /* Para telas menores */
 }
 
 .servico-imagem {
     flex: 0 0 35%;
     max-width: 35%;
     min-width: 280px;
-    /* Largura mínima para a imagem */
 }
 
 .servico-imagem img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Garante que a imagem cubra o espaço sem distorcer */
     display: block;
     border-radius: var(--border-radius-padrao);
     box-shadow: var(--sombra-padrao);
@@ -371,7 +380,6 @@ h3 {
     display: flex;
     flex-direction: column;
     min-width: 280px;
-    /* Largura mínima para o texto */
 }
 
 .servico-descricao h3 {
@@ -390,13 +398,9 @@ h3 {
 
 .servico-cta {
     margin-top: auto;
-    /* Empurra o link para o final do card */
     align-self: flex-start;
-    /* Alinha à esquerda, pode ser flex-end para direita */
     padding-top: 15px;
-    /* Espaço acima do link */
     margin-bottom: 0;
-    /* Remove margem inferior do parágrafo */
 }
 
 .link-discreto {
@@ -407,7 +411,6 @@ h3 {
     border-radius: var(--border-radius-padrao);
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     border: 1px solid transparent;
-    /* Borda transparente para alinhamento */
     display: inline-block;
 }
 
@@ -415,31 +418,16 @@ h3 {
     background-color: var(--cor-fundo-secao-alternativa);
     color: var(--cor-acento-hover);
     border-color: var(--cor-borda-sutil);
-    /* Borda sutil no hover */
     text-decoration: none;
 }
 
 /* === SEÇÃO CONTATO ATUALIZADA === */
 #contato {
     background-color: var(--cor-fundo-secao-alternativa);
-    /* SUGESTÃO OPCIONAL DE IMAGEM DE FUNDO SUTIL */
-    /* background-image: url('imagens/sua-imagem-de-fundo-musical.jpg'); */
-    /* background-size: cover; */
-    /* background-position: center; */
-    /* background-repeat: no-repeat; */
-    /* background-blend-mode: overlay; */
 }
 
 #contato .container.section-padding {
-    /*
-     * Define o espaçamento interno para o container da seção de Contato.
-     * O padding-top foi aumentado para 85px para garantir que o conteúdo
-     * não seja sobreposto pelo cabeçalho fixo.
-     * Os paddings laterais (20px) e o padding-bottom (40px) foram mantidos
-     * conforme a definição original específica para esta seção.
-     */
     padding: 85px 20px 40px 20px;
-    /* padding: top right bottom left */
     max-width: 1100px;
     margin: 0 auto;
 }
@@ -448,7 +436,6 @@ h3 {
     text-align: center;
     color: var(--cor-texto-principal);
     margin-bottom: 20px;
-    /* Reduzido para a seção de contato */
 }
 
 .contato-info {
@@ -456,7 +443,6 @@ h3 {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-bottom: 40px;
-    /* Espaço antes do formulário/FAQ */
 }
 
 a.contato-item {
@@ -505,7 +491,7 @@ a.contato-item p {
 }
 
 a.contato-item.telefone-item:hover {
-    background-color: #4CAF50;
+    background-color: #1F3760;
 }
 
 a.contato-item.whatsapp-item:hover {
@@ -627,23 +613,18 @@ footer {
     color: var(--cor-fundo-secao-alternativa);
     text-align: center;
     padding: 25px 0;
-    /* margin-top: 50px; Removido ou ajustado, pois o conteúdo da página deve empurrá-lo naturalmente */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     body {
         font-size: 95%;
-        /* Ajuste global para telas menores */
     }
 
     #parallax-banner {
         min-height: 40vh;
-        /* Reduz altura do parallax em telas menores */
         margin-top: 70px;
-        /* Ajuste para altura do header em mobile, se diferente */
         background-attachment: scroll;
-        /* Melhora performance em mobile */
     }
 
     header {
@@ -652,7 +633,6 @@ footer {
 
     header .container {
         flex-direction: column;
-        /* Empilha logo e nav em mobile */
         gap: 10px;
     }
 
@@ -664,36 +644,30 @@ footer {
 
     header nav ul li {
         margin: 5px 10px;
-        /* Ajusta espaçamento dos links do menu */
     }
 
     h2 {
         font-size: 2em;
-        /* Reduz tamanho dos títulos principais */
     }
 
     .secao-introducao,
     .secao-encerramento {
         font-size: 1em;
         padding: 0 10px;
-        /* Adiciona padding lateral em mobile */
     }
 
     .sobre-mim-content {
         flex-direction: column;
-        /* Empilha texto e imagem */
         gap: 30px;
     }
 
     .sobre-mim-texto,
     .sobre-mim-imagem {
         flex-basis: 100%;
-        /* Ocupa toda a largura */
     }
 
     .sobre-mim-botoes {
         justify-content: center;
-        /* Centraliza botões em telas menores */
     }
 
     .servico-item-layout {
@@ -704,19 +678,14 @@ footer {
 
     .servico-imagem {
         flex-basis: auto;
-        /* Reseta flex-basis */
         width: 80%;
-        /* Ajusta largura da imagem do serviço */
         max-width: 300px;
-        /* Limita o tamanho máximo */
         margin-bottom: 20px;
     }
 
     .servico-imagem img {
         height: auto;
-        /* Altura automática para manter proporção */
         object-fit: contain;
-        /* Garante que toda imagem apareça */
     }
 
     .servico-descricao {
@@ -730,18 +699,15 @@ footer {
 
     .servico-cta {
         align-self: center;
-        /* Centraliza o CTA */
         margin-top: 20px;
     }
 
     .contato-info {
         grid-template-columns: 1fr;
-        /* Uma coluna para itens de contato */
     }
 
     a.contato-item {
         min-height: 180px;
-        /* Altura mínima para itens de contato em mobile */
     }
 
     .formulario-contato-container,
@@ -763,6 +729,23 @@ footer {
 
     #formContato button[type="submit"] {
         width: 100%;
-        /* Botão do formulário ocupa largura total */
     }
+}
+
+.contato-info a.contato-item h4,
+.contato-info a.contato-item p {
+    color: white !important;
+}
+
+.servicos-content {
+    perspective: 1000px;
+}
+
+.tab-content {
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+
+.tab-content:hover {
+    transform: translateZ(50px);
+    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
 }
