@@ -800,3 +800,12 @@ footer {
 .carousel-container:hover .carousel-button {
     opacity: 1;
 }
+
+#sobre {
+    margin-top: 5vh;
+}
+
+#servicos h2,
+#contato h2 {
+    margin-top: 40px;
+}
