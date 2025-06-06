@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diogo Pianista - A Arte da Música</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="preload" href="fundo.jpeg" as="image">
+</head>
+<body class="overflow-x-hidden">
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <section id="splash-screen" class="splash-screen-section">
+        <div class="splash-screen-bg" style="background-image: url('fundo.jpeg');"></div> 
+        <div class="splash-screen-content">
+            <h1 class="hero-quote">
+                "Põe tua alma nisso, toque da maneira que sentes a música"
+            </h1>
+            <p class="hero-author">
+                – Frédéric Chopin
+            </p>
+            <button id="discover-button" class="discover-button">
+                Descobrir o Site <i class="fas fa-chevron-right"></i> </button>
+        </div>
+    </section>
+
+    <div id="site-content" class="site-content hidden-content">
+        <nav id="main-nav" class="main-nav">
+            <div class="container">
+                <a href="#splash-screen" class="nav-brand">Diogo Pianista</a>
+                <ul class="nav-links">
+                    <li><a href="#about-me" class="nav-item" data-section="about-me">Sobre Diogo</a></li>
+                    <li><a href="#services" class="nav-item" data-section="services">Serviços</a></li>
+                    <li><a href="#contact" class="nav-item" data-section="contact">Contato</a></li>
+                    </ul>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="mobile-menu-dropdown">
+            <a href="#about-me" class="mobile-nav-item" data-section="about-me">Sobre Diogo</a>
+            <a href="#services" class="mobile-nav-item" data-section="services">Serviços</a>
+            <a href="#contact" class="mobile-nav-item" data-section="contact">Contato</a>
+        </div>
+
+        <main>
+            <section id="about-me" class="content-section about-section">
+                <div class="container mx-auto text-center">
+                    <h2 class="section-title">Sobre Diogo</h2>
+                    <p class="section-subtitle">Conheça a jornada e a paixão pela música.</p>
+                    <div class="about-grid">
+                        <div class="about-image-container">
+                            <img src="perfil.jpeg" alt="Foto de Diogo Pianista" class="about-image">
+                        </div>
+                        <div class="about-text">
+                            <p>Diogo é um pianista dedicado e apaixonado, com anos de experiência no mundo da música. Sua jornada começou cedo, ao ser cativado pelas melodias clássicas e pela expressividade que apenas um piano pode oferecer.</p>
+                            <p>Ele se especializou em performances para eventos, aulas particulares e composição, sempre buscando transmitir a emoção e a beleza da música para seu público e alunos. Com uma didática clara e inspiradora, Diogo acredita que a música é acessível a todos.</p>
+                            <p>Seja para um evento memorável ou para iniciar sua própria jornada musical, Diogo está pronto para compartilhar seu talento e conhecimento.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="content-section services-section">
+                <div class="container mx-auto text-center">
+                    <h2 class="section-title">Serviços</h2>
+                    <p class="section-subtitle">O que eu ofereço para a sua experiência musical.</p>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <i class="fas fa-music service-icon"></i>
+                            <h3 class="card-title">Performance em Eventos</h3>
+                            <p class="card-description">Música ao vivo para casamentos, jantares, eventos corporativos e mais. Crio a atmosfera perfeita para sua ocasião especial.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-chalkboard-teacher service-icon"></i>
+                            <h3 class="card-title">Aulas Particulares de Piano</h3>
+                            <p class="card-description">Aulas personalizadas para todos os níveis, do iniciante ao avançado. Aprenda no seu ritmo e alcance seus objetivos musicais.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-headphones service-icon"></i>
+                            <h3 class="card-title">Composição e Arranjo</h3>
+                            <p class="card-description">Criação de peças originais e arranjos personalizados para suas músicas favoritas, adaptadas ao piano ou outros instrumentos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="content-section contact-section">
+                <div class="container mx-auto text-center">
+                    <h2 class="section-title">Entre em Contato</h2>
+                    <p class="section-subtitle">Vamos criar algo musical juntos.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope icon-small"></i> E-mail: <a href="mailto:contato@diogopianista.com" class="text-blue-600 hover:underline">contato@diogopianista.com</a></p>
+                        <p><i class="fas fa-phone icon-small"></i> Telefone: <a href="tel:+5511999999999" class="text-blue-600 hover:underline">(11) 99999-9999</a></p>
+                        <div class="social-links">
+                            <a href="#" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container mx-auto text-center">
+                <p>&copy; <span id="current-year"></span> Diogo Pianista. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div> <script src="script.js"></script>
+</body>
+</html>
