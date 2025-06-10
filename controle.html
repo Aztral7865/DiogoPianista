@@ -25,6 +25,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="index.html" class="logo">Controle de alunos</a>
+                <button class="close-sidebar-btn" id="closeSidebarBtn">&times;</button>
             </div>
             <nav class="sidebar-nav">
                 <ul>
@@ -49,6 +50,7 @@
 
             <section id="painel-geral-section" class="content-section active">
                 <header class="main-header">
+                    <button class="mobile-menu-toggle-btn" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
                     <h1>Painel Geral</h1>
                 </header>
                 <div class="stats-cards">
@@ -120,15 +122,18 @@
 
             <section id="alunos-ativos-section" class="content-section">
                 <header class="main-header">
+                    <button class="mobile-menu-toggle-btn" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
                     <h1>Alunos Ativos</h1>
                     <button class="btn btn-primary add-aluno-btn"><i class="fa-solid fa-plus"></i> Adicionar Novo
                         Aluno</button>
                 </header>
-                <p>Conteúdo da seção Alunos Ativos.</p>
+                <div class="table-container">
+                     </div>
             </section>
 
             <section id="pagamentos-section" class="content-section">
                 <header class="main-header">
+                    <button class="mobile-menu-toggle-btn" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
                     <h1 id="header-pagamentos">Pagamentos</h1>
                 </header>
                 <div class="table-container">
@@ -148,13 +153,16 @@
 
             <section id="historico-alunos-section" class="content-section">
                 <header class="main-header">
+                    <button class="mobile-menu-toggle-btn" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
                     <h1>Histórico de Alunos</h1>
                 </header>
-                <p>Conteúdo da seção Histórico de Alunos.</p>
+                <div class="table-container">
+                    </div>
             </section>
 
             <section id="agendar-section" class="content-section">
                 <header class="main-header">
+                    <button class="mobile-menu-toggle-btn" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
                     <h1>Agendar Aulas</h1>
                     <button id="btn-nova-aula" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nova
                         Aula</button>
