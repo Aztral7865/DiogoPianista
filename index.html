@@ -37,7 +37,7 @@
     </section>
 
     <template id="conteudo-principal-template">
-        <header>
+        <header class="site-publico-header">
             <nav class="container">
                 <a href="#sobre" class="logo nav-link">
                     <img src="iconFav.png" alt="Logo Diogo Pianista" class="logo-imagem">
@@ -90,7 +90,7 @@
                                 <button class="carousel-button next" aria-label="Próxima imagem">&#10095;</button>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </section>
 
@@ -223,8 +223,8 @@
                         <h3>Envie uma Mensagem Direta</h3>
                         <form id="formContato" action="#" method="POST">
                             <div><label for="nome">Nome:</label><input type="text" id="nome" name="nome" required></div>
-                            <div><label for="email">Email:</label><input type="email" id="email" name="email" required>
-                            </div>
+                            <div><label for="contato-email">Email:</label><input type="email" id="contato-email"
+                                    name="email" required></div>
                             <div><label for="assunto">Assunto:</label><input type="text" id="assunto" name="assunto">
                             </div>
                             <div><label for="mensagem">Mensagem:</label><textarea id="mensagem" name="mensagem" rows="5"
@@ -258,11 +258,37 @@
                     </p>
                 </div>
             </section>
+
+            <section id="controle-login" class="content-section">
+                <div class="login-container-dark">
+                    <div class="login-box">
+                        <h2>Área do Professor</h2>
+                        <p>Acesso exclusivo para gerenciamento de alunos.</p>
+                        <form id="loginForm" novalidate>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn-login">Entrar</button>
+                            <p id="loginError" class="login-error-message">Erro ao fazer login. Verifique suas
+                                credenciais.</p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <footer>
             <div class="container">
                 <p>&copy; <span id="currentYear"></span> Diogo Pianista. Todos os direitos reservados.</p>
+                <div class="footer-admin-link">
+                    <a href="#" id="adminLoginBtn">Área do Professor</a>
+                </div>
             </div>
         </footer>
     </template>
@@ -270,6 +296,8 @@
     <div id="site-content-wrapper"></div>
 
     <script src="script.js" defer></script>
+
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
