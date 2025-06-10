@@ -40,9 +40,39 @@ function setupUI() {
     setupAddAulaModal();
     setupLogout();
     inicializarCalendario();
-    // NOVO: Chamamos a função para configurar os cliques na tabela de alunos
     setupEventListenersTabelaAlunos();
+
+    // ✅ LÓGICA DO MENU ATUALIZADA ✅
+    const mobileMenuToggles = document.querySelectorAll('.mobile-menu-toggle-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn'); // Pega o novo botão 'X'
+
+    if (sidebar) {
+        // Lógica para os botões de abrir (hamburger)
+        mobileMenuToggles.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                sidebar.classList.add('active');
+            });
+        });
+
+        // Lógica para o botão de fechar ('X')
+        if (closeSidebarBtn) {
+            closeSidebarBtn.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+            });
+        }
+        
+        // Lógica para fechar clicando fora
+        mainContent.addEventListener('click', () => {
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+    }
 }
+
 
 async function carregarDadosIniciais() {
     try {
@@ -70,48 +100,62 @@ async function carregarDadosIniciais() {
 //  2. NAVEGAÇÃO E MODAIS
 // ======================================================= //
 function setupNavigation() {
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
+    const navLinks = document.querySelectorAll('.sidebar-nav a, .sidebar-footer .logout-button'); // Adicionado o botão de sair aqui
     navLinks.forEach(link => {
         link.addEventListener('click', e => {
+            if (link.id === 'logoutBtn') return; // Deixa o logout fazer sua função padrão
+            
             e.preventDefault();
             const href = link.getAttribute('href');
             if (href === '#') return;
             showSection(href.substring(1));
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
+            
+            // Remove a classe 'active' de todos antes de adicionar na correta
+            document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+            if(link.closest('.sidebar-nav')) {
+                 link.classList.add('active');
+            }
+
+            document.querySelector('.sidebar')?.classList.remove('active');
         });
     });
 }
+
 
 function showSection(sectionId) {
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.toggle('active', section.id === sectionId);
     });
+    // Atualiza o botão hamburger para corresponder à seção ativa
+    document.querySelectorAll('.main-header .mobile-menu-toggle-btn').forEach(btn => {
+        btn.style.display = 'none';
+    });
+    const activeHeaderBtn = document.querySelector(`.content-section.active .main-header .mobile-menu-toggle-btn`);
+    if(activeHeaderBtn) {
+        activeHeaderBtn.style.display = 'block';
+    }
+
     if (sectionId === 'agendar-section' && calendario) {
         setTimeout(() => calendario.updateSize(), 10);
     }
 }
 
-// ATUALIZADO: A lógica de submissão do formulário agora diferencia entre ADICIONAR e EDITAR
 function setupAddAlunoModal() {
     const modal = document.getElementById('add-aluno-modal');
     const form = document.getElementById('form-add-aluno');
     const modalTitle = document.getElementById('aluno-modal-title');
 
-    // Abre o modal para ADICIONAR um novo aluno
     document.querySelectorAll('.add-aluno-btn').forEach(btn => btn.addEventListener('click', () => {
-        form.reset(); // Limpa o formulário
-        modalTitle.textContent = 'Adicionar Novo Aluno'; // Define o título para "Adicionar"
-        form['aluno-id-edit'].value = ''; // Garante que o campo de ID esteja vazio
+        form.reset();
+        modalTitle.textContent = 'Adicionar Novo Aluno';
+        form['aluno-id-edit'].value = '';
         modal.classList.add('active');
     }));
 
-    // Fecha o modal
     document.querySelectorAll('#add-aluno-modal .close-modal-btn, #add-aluno-modal .cancel-modal-btn').forEach(btn => btn.addEventListener('click', () => {
         modal.classList.remove('active');
     }));
 
-    // Lógica de submissão do formulário
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -130,12 +174,10 @@ function setupAddAlunoModal() {
 
         try {
             if (idParaEditar) {
-                // MODO DE EDIÇÃO: Atualiza um documento existente
                 const alunoRef = doc(db, 'alunos', idParaEditar);
                 await updateDoc(alunoRef, dadosAluno);
                 alert('Aluno atualizado com sucesso!');
             } else {
-                // MODO DE ADIÇÃO: Cria um novo documento
                 dadosAluno.criado_em = serverTimestamp();
                 await addDoc(collection(db, "alunos"), dadosAluno);
                 alert('Aluno adicionado com sucesso!');
@@ -143,7 +185,7 @@ function setupAddAlunoModal() {
 
             form.reset();
             modal.classList.remove('active');
-            carregarDadosIniciais(); // Recarrega os dados para mostrar as alterações
+            carregarDadosIniciais();
         } catch (error) {
             console.error("Erro ao salvar aluno:", error);
             alert("Não foi possível salvar as informações do aluno.");
@@ -151,17 +193,14 @@ function setupAddAlunoModal() {
     });
 }
 
-// NOVO: Função para abrir o modal de edição e preencher com dados
 function abrirModalDeEdicao(aluno) {
     const modal = document.getElementById('add-aluno-modal');
     const form = document.getElementById('form-add-aluno');
     const modalTitle = document.getElementById('aluno-modal-title');
 
-    // 1. Mudar o título do modal
     modalTitle.textContent = 'Editar Aluno';
 
-    // 2. Preencher o formulário com os dados do aluno
-    form['aluno-id-edit'].value = aluno.id; // IMPORTANTE: Define o ID no campo oculto
+    form['aluno-id-edit'].value = aluno.id;
     form['nome-completo'].value = aluno.nome_completo;
     form['email'].value = aluno.email || '';
     form['instrumento-principal'].value = aluno.instrumento_principal || '';
@@ -170,11 +209,9 @@ function abrirModalDeEdicao(aluno) {
     form['dia-semana'].value = aluno.dia_semana || '';
     form['horario-aula'].value = aluno.horario_aula || '';
 
-    // 3. Abrir o modal
     modal.classList.add('active');
 }
 
-// NOVO: Função para "ouvir" os cliques nos botões da tabela de alunos
 function setupEventListenersTabelaAlunos() {
     const tabelaBody = document.getElementById('listaAlunosDashboard');
 
@@ -182,7 +219,6 @@ function setupEventListenersTabelaAlunos() {
         const editButton = e.target.closest('.btn-edit-aluno');
         if (editButton) {
             const alunoId = editButton.dataset.id;
-            // Encontra o objeto completo do aluno na nossa lista local
             const alunoParaEditar = listaDeAlunos.find(a => a.id === alunoId);
             if (alunoParaEditar) {
                 abrirModalDeEdicao(alunoParaEditar);
@@ -377,7 +413,6 @@ function atualizarEventosCalendario(alunos, aulasAvulsas) {
 // ======================================================= //
 //  4. RENDERIZAÇÃO DAS OUTRAS SEÇÕES
 // ======================================================= //
-// ATUALIZADO: O botão de editar agora tem uma classe e um 'data-id'
 function renderizarTabelaAlunos(alunos, tableBody) {
     tableBody.innerHTML = '';
     if (!alunos || alunos.length === 0) {
