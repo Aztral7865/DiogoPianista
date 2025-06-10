@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Geral - Controle de Alunos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">Controle de alunos</a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#painel-geral-section" class="active"><i class="fa-solid fa-chart-pie"></i>
+                            Dashboard</a></li>
+                    <li><a href="#alunos-ativos-section"><i class="fa-solid fa-users"></i> Alunos ativos</a></li>
+                    <li><a href="#" class="add-aluno-btn"><i class="fa-solid fa-user-plus"></i> Add aluno</a></li>
+                    <li><a href="#pagamentos-section"><i class="fa-solid fa-file-invoice-dollar"></i> Pagamentos</a>
+                    </li>
+                    <li><a href="#historico-alunos-section"><i class="fa-solid fa-clock-rotate-left"></i> Histórico de
+                            alunos</a></li>
+                    <li><a href="#agendar-section"><i class="fa-solid fa-calendar-days"></i> Agendar</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-button"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    Sair</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <section id="painel-geral-section" class="content-section active">
+                <header class="main-header">
+                    <h1>Painel Geral</h1>
+                </header>
+                <div class="stats-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon-wrapper icon-blue"><i class="fa-solid fa-users"></i></div>
+                            <span class="card-growth-rate" id="alunos-growth">0%</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-value" id="total-alunos">0</p>
+                            <p class="card-description">Alunos Ativos</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon-wrapper icon-green"><i class="fa-solid fa-calendar-check"></i></div>
+                            <span class="card-growth-rate" id="aulas-growth">0%</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-value" id="aulas-semana">--</p>
+                            <p class="card-description">Aulas nessa semana</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon-wrapper icon-yellow"><i class="fa-solid fa-dollar-sign"></i></div>
+                            <span class="card-growth-rate" id="receita-growth">0%</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-value" id="receita-mensal">R$ 0,00</p>
+                            <p class="card-description">Receita mensal</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon-wrapper icon-purple"><i class="fa-solid fa-clock"></i></div>
+                            <span class="card-growth-rate" id="horas-growth">0%</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-value" id="horas-ensino">--h</p>
+                            <p class="card-description">Horas de ensino</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="active-students-section">
+                    <div class="section-header">
+                        <h2>Alunos Ativos</h2>
+                        <button class="btn btn-primary add-aluno-btn"><i class="fa-solid fa-plus"></i> Add
+                            Aluno</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Instrumento</th>
+                                    <th>Nível</th>
+                                    <th>Próxima aula</th>
+                                    <th>Pagamento</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listaAlunosDashboard">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="alunos-ativos-section" class="content-section">
+                <header class="main-header">
+                    <h1>Alunos Ativos</h1>
+                    <button class="btn btn-primary add-aluno-btn"><i class="fa-solid fa-plus"></i> Adicionar Novo
+                        Aluno</button>
+                </header>
+                <p>Conteúdo da seção Alunos Ativos.</p>
+            </section>
+
+            <section id="pagamentos-section" class="content-section">
+                <header class="main-header">
+                    <h1 id="header-pagamentos">Pagamentos</h1>
+                </header>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Valor da Mensalidade</th>
+                                <th>Status do Pagamento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaPagamentos">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="historico-alunos-section" class="content-section">
+                <header class="main-header">
+                    <h1>Histórico de Alunos</h1>
+                </header>
+                <p>Conteúdo da seção Histórico de Alunos.</p>
+            </section>
+
+            <section id="agendar-section" class="content-section">
+                <header class="main-header">
+                    <h1>Agendar Aulas</h1>
+                    <button id="btn-nova-aula" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nova
+                        Aula</button>
+                </header>
+                <div class="agendar-section-content calendario-container">
+                    <div id="calendario"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="add-aluno-modal" class="modal-container">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h4 id="aluno-modal-title">Adicionar Novo Aluno</h4>
+
+            <form id="form-add-aluno">
+                <input type="hidden" id="aluno-id-edit">
+
+                <div class="form-group">
+                    <label for="nome-completo">Nome Completo</label>
+                    <input type="text" id="nome-completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="instrumento-principal">Instrumento</label>
+                        <input type="text" id="instrumento-principal">
+                    </div>
+                    <div class="form-group">
+                        <label for="nivel-proficiencia">Nível</label>
+                        <input type="text" id="nivel-proficiencia">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="valor-mensalidade">Valor da Mensalidade</label>
+                    <input type="number" id="valor-mensalidade" step="0.01">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dia-semana">Dia Fixo</label>
+                        <select id="dia-semana">
+                            <option value="">Nenhum</option>
+                            <option value="1">Segunda-feira</option>
+                            <option value="2">Terça-feira</option>
+                            <option value="3">Quarta-feira</option>
+                            <option value="4">Quinta-feira</option>
+                            <option value="5">Sexta-feira</option>
+                            <option value="6">Sábado</option>
+                            <option value="0">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="horario-aula">Horário da Aula</label>
+                        <input type="time" id="horario-aula">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="add-aula-modal" class="modal-container">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+
+            <div id="view-aula-section">
+                <h4 id="view-aula-title">Aulas do Dia</h4>
+                <div id="view-aula-list">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary cancel-modal-btn">Fechar</button>
+                    <button class="btn btn-primary" id="btn-show-form-add-aula"><i class="fa-solid fa-plus"></i> Nova
+                        Aula</button>
+                </div>
+            </div>
+
+            <form id="form-add-aula" style="display: none;">
+                <h4>Agendar Nova Aula</h4>
+
+                <div class="form-group">
+                    <label for="select-aluno-aula">Aluno</label>
+                    <select id="select-aluno-aula" required>
+                        <option value="" disabled selected>Selecione um aluno</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="data-aula">Data</label>
+                        <input type="date" id="data-aula" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horario-nova-aula">Horário</label>
+                        <input type="time" id="horario-nova-aula" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btn-back-to-view">Voltar</button>
+                    <button type="submit" class="btn btn-primary">Agendar Aula</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="controle.js"></script>
+</body>
+
+</html>
