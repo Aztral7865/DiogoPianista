@@ -18,8 +18,6 @@
     --border-radius-padrao: 8px;
 }
 
-
-
 body {
     background-color: var(--cor-fundo-principal);
     color: var(--cor-texto-principal);
@@ -68,18 +66,10 @@ h6 {
     }
 }
 
-/* EFEITO FADE-IN (APARECER AOS POUCOS) */
-
 #site-content-wrapper {
     transition: opacity 1.5s ease-out;
 }
 
-#site-content-wrapper.conteudo-esmaecido {
-    opacity: 0;
-}
-
-
-/* Estilo para parágrafos introdutórios e de encerramento de seção */
 .secao-introducao,
 .secao-encerramento {
     text-align: center;
@@ -99,8 +89,6 @@ h6 {
     margin-top: 40px;
 }
 
-
-/* Cabeçalho e Navegação Modernizados */
 .site-publico-header {
     background-color: var(--cor-fundo-principal);
     padding: 15px 0;
@@ -184,7 +172,6 @@ header nav ul li a.nav-link.active-link {
     background-color: var(--cor-fundo-secao-alternativa);
 }
 
-/* Parallax Banner */
 #parallax-banner {
     min-height: 65vh;
     width: 100%;
@@ -194,7 +181,6 @@ header nav ul li a.nav-link.active-link {
     background-repeat: no-repeat;
     background-size: cover;
     filter: grayscale(100%);
-    margin-top: 82px;
 }
 
 #parallax-banner.visible-section {
@@ -236,7 +222,7 @@ h3 {
 }
 
 .sobre-mim-imagem {
-    flex: 0 1 35%;
+    flex: 0 1 45%; 
     min-width: 300px;
 }
 
@@ -254,7 +240,6 @@ h3 {
     flex-wrap: wrap;
 }
 
-/* Botões Modernizados */
 .btn {
     display: inline-block;
     padding: 12px 28px;
@@ -296,7 +281,6 @@ h3 {
     color: var(--cor-acento-primario);
 }
 
-/* Seção Serviços */
 #servicos {
     background-color: var(--cor-fundo-secao-alternativa);
 }
@@ -416,7 +400,6 @@ h3 {
     text-decoration: none;
 }
 
-/* === SEÇÃO CONTATO ATUALIZADA === */
 #contato {
     background-color: var(--cor-fundo-secao-alternativa);
 }
@@ -497,8 +480,6 @@ a.contato-item.instagram-item:hover {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
-/* Estilos para o Formulário de Contato e FAQ */
-
 .formulario-contato-container {
     margin-top: 60px;
     margin-bottom: 60px;
@@ -559,7 +540,6 @@ a.contato-item.instagram-item:hover {
     padding: 12px 28px;
 }
 
-/* Estilos para a Seção de Perguntas Frequentes (FAQ) */
 .faq-container {
     margin-top: 60px;
     margin-bottom: 40px;
@@ -601,148 +581,11 @@ a.contato-item.instagram-item:hover {
     line-height: 1.7;
 }
 
-
-/* Rodapé */
 footer {
     background-color: var(--cor-texto-principal);
     color: var(--cor-fundo-secao-alternativa);
     text-align: center;
     padding: 25px 0;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    body {
-        font-size: 95%;
-    }
-
-    #parallax-banner {
-        min-height: 40vh;
-        margin-top: 70px;
-        background-attachment: scroll;
-    }
-
-    header {
-        padding: 10px 0;
-    }
-
-    header .container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    header nav ul {
-        margin-top: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    header nav ul li {
-        margin: 5px 10px;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    .secao-introducao,
-    .secao-encerramento {
-        font-size: 1em;
-        padding: 0 10px;
-    }
-
-    .sobre-mim-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .sobre-mim-texto,
-    .sobre-mim-imagem {
-        flex-basis: 100%;
-    }
-
-    .sobre-mim-botoes {
-        justify-content: center;
-    }
-
-    .servico-item-layout {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .servico-imagem {
-        flex-basis: auto;
-        width: 80%;
-        max-width: 300px;
-        margin-bottom: 20px;
-    }
-
-    .servico-imagem img {
-        height: auto;
-        object-fit: contain;
-    }
-
-    .servico-descricao {
-        flex-basis: auto;
-        align-items: center;
-    }
-
-    .servico-descricao h3 {
-        text-align: center;
-    }
-
-    .servico-cta {
-        align-self: center;
-        margin-top: 20px;
-    }
-
-    .contato-info {
-        grid-template-columns: 1fr;
-    }
-
-    a.contato-item {
-        min-height: 180px;
-    }
-
-    .formulario-contato-container,
-    .faq-container {
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-
-    .formulario-contato-container h3,
-    .faq-container h3 {
-        font-size: 1.6em;
-    }
-
-    .faq-item h4 {
-        font-size: 1.2em;
-    }
-
-    #formContato button[type="submit"] {
-        width: 100%;
-    }
-}
-
-.contato-info a.contato-item h4,
-.contato-info a.contato-item p {
-    color: white !important;
-}
-
-.servicos-content {
-    perspective: 1000px;
-}
-
-.tab-content {
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-}
-
-.tab-content:hover {
-    transform: translateZ(50px);
-    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
 }
 
 .carousel-container {
@@ -761,7 +604,7 @@ footer {
 }
 
 .carousel-slide {
-    width: 100%;
+    min-width: 100%;
     height: 100%;
     object-fit: cover;
     flex-shrink: 0;
@@ -780,7 +623,6 @@ footer {
     font-size: 20px;
     cursor: pointer;
     z-index: 10;
-
     opacity: 0;
     transition: opacity 0.3s ease, background-color 0.3s ease;
 }
@@ -801,17 +643,7 @@ footer {
     opacity: 1;
 }
 
-#sobre {
-    margin-top: 5vh;
-}
-
-#servicos h2,
-#contato h2 {
-    margin-top: 40px;
-}
-
 #controle-login.content-section {
-    /* Garante que a seção de login ocupe a tela toda ao ser exibida */
     padding: 0;
 }
 
@@ -820,21 +652,17 @@ footer {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    /* Altura total da tela */
     background-color: #121212;
-    /* Fundo escuro principal */
     font-family: 'Poppins', sans-serif;
 }
 
 .login-box {
     background-color: #131313;
-    /* Cor do "card" de login, um pouco mais clara que o fundo */
     padding: 40px 50px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-width: 400px;
-    /* Largura máxima do formulário */
     text-align: center;
     border: 1px solid #333;
 }
@@ -852,20 +680,20 @@ footer {
     font-size: 0.95em;
 }
 
-.form-group {
+.login-box .form-group {
     margin-bottom: 25px;
     text-align: left;
 }
 
-.form-group label {
+.login-box .form-group label {
     display: block;
     color: #a0a0a0;
     margin-bottom: 8px;
     font-size: 0.9em;
 }
 
-.form-group input[type="email"],
-.form-group input[type="password"] {
+.login-box .form-group input[type="email"],
+.login-box .form-group input[type="password"] {
     width: 100%;
     padding: 12px 15px;
     background-color: #2c2c2c;
@@ -876,11 +704,10 @@ footer {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group input[type="email"]:focus,
-.form-group input[type="password"]:focus {
+.login-box .form-group input[type="email"]:focus,
+.login-box .form-group input[type="password"]:focus {
     outline: none;
     border-color: #9800be;
-    /* Um azul para destaque no foco */
     box-shadow: 0 0 0 3px rgba(86, 0, 126, 0.2);
 }
 
@@ -904,14 +731,11 @@ footer {
 
 .login-error-message {
     color: #ff4d4d !important;
-    /* Cor vermelha para a mensagem de erro */
     font-size: 0.9em;
     margin-top: 20px;
     display: none;
-    /* A mensagem é controlada pelo JS */
 }
 
-/* Estilo para o link de admin no rodapé */
 .footer-admin-link {
     margin-top: 10px;
     font-size: 0.9em;
@@ -919,23 +743,15 @@ footer {
 
 .footer-admin-link a {
     color: #a0a0a0;
-    /* Um cinza claro para combinar com o rodapé escuro */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-admin-link a:hover {
     color: #ffffff;
-    /* Fica branco ao passar o mouse */
     text-decoration: underline;
 }
 
-
-/* ======================================================= */
-/* === ESTILOS ISOLADOS PARA O PAINEL DE CONTROLE (NOVO) === */
-/* ======================================================= */
-
-/* -- Reset e Estilos Gerais do Painel -- */
 .dashboard-container * {
     box-sizing: border-box;
 }
@@ -948,14 +764,14 @@ footer {
     overflow-x: hidden;
 }
 
-/* -- Layout Principal do Painel -- */
 .dashboard-container {
     display: flex;
     background-color: #1E1E2D;
     min-height: 100vh;
+    position: relative;
 }
 
-/* -- Barra Lateral (Sidebar) -- */
+/* ✅ ESTILOS DO SIDEBAR ATUALIZADOS ✅ */
 .dashboard-container .sidebar {
     width: 260px;
     background-color: #1B1B29;
@@ -963,6 +779,14 @@ footer {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1300; /* Aumentado para ficar sobre o hamburger */
+    overflow-y: auto; /* Adicionado para permitir rolagem vertical */
+}
+
+.dashboard-container .sidebar-header {
+    position: relative; /* Necessário para o posicionamento do botão 'X' */
+    margin-bottom: 3rem;
 }
 
 .dashboard-container .sidebar-header .logo {
@@ -970,7 +794,6 @@ footer {
     font-weight: 600;
     color: #FFFFFF;
     text-decoration: none;
-    margin-bottom: 3rem;
     display: block;
 }
 
@@ -1041,12 +864,17 @@ footer {
     margin-right: 1rem;
 }
 
-
-/* -- Conteúdo Principal (Main) -- */
 .dashboard-container .main-content {
     flex-grow: 1;
     padding: 2rem 3rem;
     background-color: #121212;
+    width: 100%;
+}
+
+.dashboard-container .main-header {
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
 }
 
 .dashboard-container .main-header h1 {
@@ -1056,28 +884,27 @@ footer {
     margin-bottom: 2rem;
 }
 
-/* -- Cartões de Estatísticas -- */
-.dashboard-container .stats-cards {
+.stats-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
     margin-bottom: 3rem;
 }
 
-.dashboard-container .card {
+.card {
     background-color: #1B1B29;
     padding: 1.5rem;
     border-radius: 12px;
 }
 
-.dashboard-container .card-header {
+.card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
 }
 
-.dashboard-container .card-icon-wrapper {
+.card-icon-wrapper {
     width: 40px;
     height: 40px;
     border-radius: 8px;
@@ -1087,61 +914,61 @@ footer {
     font-size: 1.2rem;
 }
 
-.dashboard-container .icon-blue {
+.icon-blue {
     background-color: #3f8cff4a;
     color: #3F8CFF;
 }
 
-.dashboard-container .icon-green {
+.icon-green {
     background-color: #00b69b4a;
     color: #00B69B;
 }
 
-.dashboard-container .icon-yellow {
+.icon-yellow {
     background-color: #f3c14c4a;
     color: #F3C14C;
 }
 
-.dashboard-container .icon-purple {
+.icon-purple {
     background-color: #6c5dd34a;
     color: #6C5DD3;
 }
 
-.dashboard-container .card-growth-rate {
+.card-growth-rate {
     font-weight: 600;
 }
 
-.dashboard-container .text-green {
+.text-green {
     color: #00B69B;
 }
 
-.dashboard-container .text-red {
+.text-red {
     color: #F94144;
 }
 
-
-.dashboard-container .card-body .card-value {
+.card-body .card-value {
     font-size: 2.2rem;
     font-weight: 600;
     color: #FFFFFF;
     margin: 0 0 0.25rem 0;
 }
 
-.dashboard-container .card-body .card-description {
+.card-body .card-description {
     font-size: 0.9rem;
     color: #A2A3B9;
     margin: 0;
 }
 
-/* -- Seção de Alunos Ativos -- */
-.dashboard-container .active-students-section .section-header {
+.active-students-section .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap; 
+    gap: 1rem;
 }
 
-.dashboard-container .active-students-section h2 {
+.active-students-section h2 {
     font-size: 1.5rem;
     font-weight: 600;
     color: #FFFFFF;
@@ -1168,69 +995,68 @@ footer {
     background-color: #5a4db0;
 }
 
-
-/* -- Tabela -- */
-.dashboard-container .table-container {
+.table-container {
     background-color: #1B1B29;
     border-radius: 12px;
     padding: 1rem;
-    overflow-x: auto;
+    overflow-x: auto; 
 }
 
-.dashboard-container table {
+table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px; 
 }
 
-.dashboard-container th,
-.dashboard-container td {
+th,
+td {
     padding: 1.2rem 1.5rem;
     text-align: left;
     border-bottom: 1px solid #2d2d3f;
     vertical-align: middle;
+    white-space: nowrap; 
 }
 
-.dashboard-container thead th {
+thead th {
     color: #A2A3B9;
     font-weight: 500;
     font-size: 0.85rem;
     text-transform: uppercase;
 }
 
-.dashboard-container tbody tr:last-child td {
+tbody tr:last-child td {
     border-bottom: none;
 }
 
-.dashboard-container .aluno-info {
+.aluno-info {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.dashboard-container .aluno-info img {
+.aluno-info img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.dashboard-container .aluno-info div {
+.aluno-info div {
     display: flex;
     flex-direction: column;
 }
 
-.dashboard-container .aluno-nome {
+.aluno-nome {
     font-weight: 500;
     color: #FFFFFF;
 }
 
-.dashboard-container .aluno-email {
+.aluno-email {
     font-size: 0.85rem;
     color: #A2A3B9;
 }
 
-/* -- Tags de Status e Instrumento -- */
-.dashboard-container .tag {
+.tag {
     display: inline-block;
     padding: 0.3rem 0.8rem;
     border-radius: 6px;
@@ -1239,23 +1065,22 @@ footer {
     text-align: center;
 }
 
-.dashboard-container .tag-instrumento {
+.tag-instrumento {
     background-color: #6c5dd34a;
     color: #a399f0;
 }
 
-.dashboard-container .tag-pagamento-pago {
+.tag-pagamento-pago {
     background-color: #00b69b4a;
     color: #00B69B;
 }
 
-.dashboard-container .tag-pagamento-pendente {
+.tag-pagamento-pendente {
     background-color: #f3c14c4a;
     color: #F3C14C;
 }
 
-/* -- Botões de Ação da Tabela -- */
-.dashboard-container .acoes-botoes button {
+.acoes-botoes button {
     background: none;
     border: none;
     color: #A2A3B9;
@@ -1265,24 +1090,17 @@ footer {
     transition: color 0.3s;
 }
 
-.dashboard-container .acoes-botoes button:hover {
+.acoes-botoes button:hover {
     color: #FFFFFF;
 }
 
-/* ======================================================= */
-/* === CSS ADICIONAL PARA SEÇÕES E MODAL (NOVO) === */
-/* ======================================================= */
-
-/* -- Controle de visibilidade das seções -- */
-.dashboard-container .content-section {
+.content-section {
     display: none;
-    /* Todas as seções começam escondidas */
     animation: fadeIn 0.5s ease-in-out;
 }
 
-.dashboard-container .content-section.active {
+.content-section.active {
     display: block;
-    /* Apenas a seção ativa é exibida */
 }
 
 @keyframes fadeIn {
@@ -1297,88 +1115,46 @@ footer {
     }
 }
 
-/* -- Estilos do Modal -- */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
-    /* Começa escondido */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-overlay.active {
-    display: flex;
-    /* Mostra o modal */
-}
-
-/* ================================== */
-/* ESTILOS DO MODAL          */
-/* ================================== */
-
-/* O contêiner do modal (o fundo escuro) */
 .modal-container {
-    /* Magia do Posicionamento */
     position: fixed;
-    /* Fixa o modal na tela, fora do fluxo normal do HTML */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 1000;
-    /* Garante que ele fique na frente de tudo */
-
-    /* Centralização do Conteúdo */
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    /* Efeito de Fundo */
+    align-items: flex-start;
     background-color: rgba(0, 0, 0, 0.6);
-    /* Fundo preto semi-transparente */
-
-    /* Lógica para esconder/mostrar com transição */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow-y: auto; 
+    padding: 5vh 0; 
 }
 
-/* Quando o modal estiver ativo (com a classe .active) */
 .modal-container.active {
     opacity: 1;
     visibility: visible;
 }
 
-/* A caixa de conteúdo do modal (o formulário em si) */
 .modal-content {
     background-color: #2c3034;
-    /* Uma cor de fundo escura, como na sua imagem */
     color: #f1f1f1;
-    /* Cor do texto clara */
     padding: 25px 35px;
     border-radius: 8px;
     width: 90%;
     max-width: 550px;
-    /* Largura máxima para não ficar gigante em telas grandes */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-
-    /* Efeito de "zoom" ao aparecer */
     transform: scale(0.9);
     transition: transform 0.3s ease;
+    position: relative; 
 }
 
-/* Quando o modal estiver ativo, o conteúdo cresce para o tamanho normal */
 .modal-container.active .modal-content {
     transform: scale(1);
 }
 
-/* Estilo para o botão de fechar (o 'X' no canto) */
 .modal-content .close-modal-btn {
     position: absolute;
     top: 10px;
@@ -1388,71 +1164,31 @@ footer {
     font-size: 24px;
     color: #aaa;
     cursor: pointer;
+    line-height: 1;
 }
 
 .modal-content .close-modal-btn:hover {
     color: #fff;
 }
 
-/* Ajustes no rodapé do modal */
 .modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    /* Espaço entre os botões */
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #444;
-    /* Linha separadora */
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid #2d2d3f;
-}
-
-.modal-header h2 {
-    color: #FFFFFF;
-    font-size: 1.4rem;
-    margin: 0;
-}
-
-.close-modal-btn {
-    background: none;
-    border: none;
-    color: #A2A3B9;
-    font-size: 2rem;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.modal-body {
-    padding: 1.5rem;
 }
 
 .form-row {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap; 
 }
 
 .form-row .form-group {
     flex: 1;
+    min-width: 150px; 
 }
 
 .form-group {
@@ -1467,7 +1203,8 @@ footer {
 }
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea { 
     width: 100%;
     background-color: #121212;
     border: 1px solid #2d2d3f;
@@ -1479,51 +1216,33 @@ footer {
 }
 
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: #6C5DD3;
 }
 
-
-
-/* ======================================================= /
-/ === ESTILOS PARA O FULLCALENDAR (ATUALIZADO) === /
-/ ======================================================= */
-
-.dashboard-container .agendar-section-content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    /* Faz o contêiner crescer */
-}
-
-.dashboard-container .calendario-container {
+.calendario-container {
     background-color: #1B1B29;
     padding: 1.5rem;
     border-radius: 8px;
     margin-top: 1rem;
-    flex-grow: 1;
+    overflow-x: auto; 
 }
 
 #calendario {
-    flex-grow: 1;
+    min-width: 500px; 
 }
 
-/* -- Geral -- */
+
 .fc {
     color: #A2A3B9;
-    background-color: transparent;
     font-size: 0.9em;
 }
 
-.fc a {
-    color: inherit;
-    text-decoration: none;
-}
-
-/* -- Cabeçalho (Toolbar) -- */
 .fc .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 1em;
+    flex-wrap: wrap; 
+    gap: 0.5rem;
 }
 
 .fc .fc-toolbar-title {
@@ -1535,158 +1254,219 @@ footer {
     background: none;
     border: 1px solid #44475B;
     color: #A2A3B9;
-    border-radius: 4px;
-    padding: 0.3em 0.7em;
-    margin: 0 0.2em;
-    cursor: pointer;
 }
 
-.fc .fc-button:hover {
-    background-color: #2D2D3F;
-    color: #FFFFFF;
-}
-
-.fc .fc-button:focus {
-    box-shadow: none;
-}
-
-.fc .fc-button.fc-button-active {
-    background-color: #6C5DD3;
-    border-color: #6C5DD3;
-    color: #FFFFFF;
-}
-
-.fc-view-harness {
-    border: 1px solid #2D2D3F;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.fc-col-header-cell {
-    background-color: #2D2D3F;
+.mobile-menu-toggle-btn {
+    display: none; 
+    background: none;
+    border: none;
     color: #A2A3B9;
-    padding: 0.7em 0.5em;
-    text-align: center;
-}
-
-.fc-daygrid-day-top {
-    justify-content: center;
-    padding: 0.5em;
-}
-
-.fc-daygrid-day-number {
-    color: #E0E0E0;
-}
-
-.fc-day-today {
-    background-color: rgba(108, 93, 211, 0.15);
-}
-
-.fc-day-today .fc-daygrid-day-number {
-    color: #6C5DD3;
-    font-weight: 500;
-}
-
-.fc-day-other .fc-daygrid-day-number {
-    color: #666;
-}
-
-.fc-daygrid-event {
-    background-color: #6C5DD3;
-    border-color: #6C5DD3;
-    color: #FFFFFF;
-    padding: 0.4em 0.6em;
-    margin: 0.2em;
-    border-radius: 4px;
+    font-size: 1.5rem;
     cursor: pointer;
-    font-size: 0.85em;
+    z-index: 1200;
 }
 
-.fc-daygrid-event:hover {
-    opacity: 0.9;
-}
-
-.fc-timegrid-event {
-    background-color: #6C5DD3;
-    border-color: #6C5DD3;
-    color: #FFFFFF;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.fc-timegrid-event-time,
-.fc-timegrid-event-title {
-    padding: 0 0.5em;
-}
-
-
-.fc-popover {
-    background-color: #1B1B29;
-    border: 1px solid #44475B;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    padding: 1em;
+/* ✅ ESTILOS PARA O BOTÃO DE FECHAR ✅ */
+.close-sidebar-btn {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
     color: #A2A3B9;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
-.fc-popover-header {
-    color: #E0E0E0;
-    border-bottom: 1px solid #44475B;
-    padding-bottom: 0.5em;
-    margin-bottom: 0.5em;
+.close-sidebar-btn:hover {
+    color: #FFFFFF;
 }
 
-.fc-popover-title {
-    font-size: 1.1em;
-    margin-bottom: 0.3em;
-}
-
-.fc-popover-body .fc-event {
-    background-color: #343A40;
-    border-color: #343A40;
-    margin-bottom: 0.3em;
-    padding: 0.5em;
-    border-radius: 4px;
-}
-
-.fc-popover-body .fc-event-title {
-    font-weight: normal;
-}
-
-.fc-popover-arrow,
-.fc-popover-arrow:after {
-    border-color: #44475B;
-}
-
-.fc-popover-arrow:after {
-    border-color: #1B1B29;
-}
 
 /* ======================================================= */
-/* === CORREÇÃO DE ALTURA DO CALENDÁRIO (NOVO) === */
+/* === INÍCIO DAS REGRAS DE RESPONSIVIDADE (MEDIA QUERIES) === */
 /* ======================================================= */
 
-.dashboard-container .agendar-section-content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    /* Faz o contêiner crescer */
+@media (max-width: 768px) {
+    body {
+        font-size: 95%;
+    }
+
+    #site-content-wrapper {
+        padding-top: 135px;
+    }
+
+    .site-publico-header {
+        padding: 10px 0;
+    }
+
+    .site-publico-header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .site-publico-header nav ul {
+        margin-top: 10px;
+        padding-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .site-publico-header nav ul li {
+        margin: 5px;
+    }
+
+    #parallax-banner {
+        min-height: 40vh;
+        background-attachment: scroll; 
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+    
+    .section-padding {
+        padding: 60px 0;
+    }
+
+    .secao-introducao,
+    .secao-encerramento {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+
+    .sobre-mim-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sobre-mim-texto,
+    .sobre-mim-imagem {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .sobre-mim-botoes {
+        justify-content: center;
+    }
+
+    .servico-item-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .servico-imagem {
+        max-width: 100%;
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .servico-descricao {
+        align-items: center;
+    }
+
+    .servico-cta {
+        align-self: center;
+    }
+    
+    .contato-info {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-contato-container, .faq-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #formContato button[type="submit"] {
+        width: 100%;
+    }
+
+    .login-box {
+        width: 90%;
+        padding: 30px 25px;
+    }
+
+    .mobile-menu-toggle-btn {
+        display: block; 
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .dashboard-container .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        transform: translateX(-100%); 
+    }
+
+    .dashboard-container .sidebar.active {
+        transform: translateX(0); 
+    }
+    
+    /* ✅ MOSTRA O BOTÃO 'X' QUANDO O MENU ESTIVER ATIVO ✅ */
+    .dashboard-container .sidebar.active .close-sidebar-btn {
+        display: block;
+    }
+
+    .dashboard-container .main-content {
+        padding: 1.5rem;
+        margin-left: 0; 
+    }
+
+    .dashboard-container .main-header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .active-students-section .section-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .fc .fc-toolbar .fc-left, 
+    .fc .fc-toolbar .fc-center, 
+    .fc .fc-toolbar .fc-right {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fc .fc-toolbar-title {
+        font-size: 1.1rem;
+    }
 }
 
-#calendario {
-    flex-grow: 1;
-    /* Faz o calendário ocupar o espaço do contêiner */
-}
-
-/* Efeito de hover para os dias no calendário */
-.fc-daygrid-day:hover {
-    background-color: #f2f8ff;
-    /* Uma cor de fundo azul bem clara */
-    cursor: pointer;
-    /* Muda o cursor para uma "mãozinha" */
-}
-
-/* Garante que o popover antigo não apareça mais, se houver algum cache */
-.fc-popover {
-    display: none !important;
+@media (max-width: 480px) {
+    #site-content-wrapper {
+        padding-top: 145px; 
+    }
+    .stats-cards {
+        grid-template-columns: 1fr; 
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
 }
