@@ -663,10 +663,12 @@ footer {
     opacity: 1;
 }
 
+/* Contêiner principal da seção de login */
 #controle-login.content-section {
     padding: 0;
 }
 
+/* Fundo escuro que preenche a tela inteira */
 .login-container-dark {
     display: flex;
     align-items: center;
@@ -676,6 +678,7 @@ footer {
     font-family: 'Poppins', sans-serif;
 }
 
+/* A caixa/card central do formulário */
 .login-box {
     background-color: #131313;
     padding: 40px 50px;
@@ -687,6 +690,7 @@ footer {
     border: 1px solid #333;
 }
 
+/* Estilos para os textos dentro da caixa de login */
 .login-box h2 {
     color: #ffffff;
     font-family: 'Lora', serif;
@@ -700,6 +704,7 @@ footer {
     font-size: 0.95em;
 }
 
+/* Estilos específicos para os grupos de formulário DENTRO do login-box */
 .login-box .form-group {
     margin-bottom: 25px;
     text-align: left;
@@ -731,6 +736,7 @@ footer {
     box-shadow: 0 0 0 3px rgba(86, 0, 126, 0.2);
 }
 
+/* Estilo do botão de entrar */
 .btn-login {
     width: 100%;
     padding: 15px;
@@ -749,12 +755,15 @@ footer {
     transform: translateY(-2px);
 }
 
+/* Mensagem de erro (inicialmente escondida) */
 .login-error-message {
     color: #ff4d4d !important;
     font-size: 0.9em;
     margin-top: 20px;
     display: none;
 }
+
+
 
 .footer-admin-link {
     margin-top: 10px;
