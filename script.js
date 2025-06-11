@@ -200,56 +200,41 @@ function initializeSiteLogic() {
 
     showSection('sobre', true);
 
-    // ATUALIZADO: Lógica do carrossel com loop infinito bidirecional
     const carouselContainers = document.querySelectorAll('.carousel-container');
-
     carouselContainers.forEach(container => {
         const track = container.querySelector('.carousel-track');
         if (!track || !track.children.length) return;
-
         let slides = Array.from(track.children);
         const nextButton = container.querySelector('.carousel-button.next');
         const prevButton = container.querySelector('.carousel-button.prev');
-
-        // 1. Lógica de clonagem para loop infinito em ambas as direções
         const firstClone = slides[0].cloneNode(true);
         firstClone.id = 'first-clone';
-
         const lastClone = slides[slides.length - 1].cloneNode(true);
         lastClone.id = 'last-clone';
-
         track.appendChild(firstClone);
         track.insertBefore(lastClone, slides[0]);
-
-        // ATUALIZADO: A lista de slides agora inclui os clones
         slides = Array.from(track.children);
-
-        let currentIndex = 1; // Começa no primeiro slide REAL
+        let currentIndex = 1;
         let slideInterval;
-
-        // 2. Define a posição inicial sem animação
         const slideWidth = slides[1].getBoundingClientRect().width;
         track.style.transition = 'none';
         track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-        // Função unificada para mover os slides
         function moveToSlide(index) {
             track.style.transition = 'transform 0.6s ease-in-out';
             currentIndex = index;
             track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
         }
 
-        // 3. Evento que acontece AO FINAL da animação para fazer o "salto"
         track.addEventListener('transitionend', () => {
             if (slides[currentIndex].id === 'first-clone') {
                 track.style.transition = 'none';
-                currentIndex = 1; // Volta para o primeiro slide real
+                currentIndex = 1;
                 track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
             }
-
             if (slides[currentIndex].id === 'last-clone') {
                 track.style.transition = 'none';
-                currentIndex = slides.length - 2; // Volta para o último slide real
+                currentIndex = slides.length - 2;
                 track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
             }
         });
@@ -263,45 +248,35 @@ function initializeSiteLogic() {
             clearInterval(slideInterval);
         }
 
-        // 4. Lógica ATUALIZADA para os botões
         if (nextButton) {
             nextButton.addEventListener('click', () => {
                 moveToSlide(currentIndex + 1);
                 startSlideShow();
             });
         }
-
         if (prevButton) {
             prevButton.addEventListener('click', () => {
                 moveToSlide(currentIndex - 1);
                 startSlideShow();
             });
         }
-
-        // Inicia o slideshow automático quando a página carrega
-        // Força a transição a ser reativada após o posicionamento inicial
         setTimeout(() => {
             track.style.transition = 'transform 0.6s ease-in-out';
             startSlideShow();
         }, 50);
-
     });
 
-    // Lógica das abas de serviço
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
-
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
-
             button.classList.add('active');
             const targetTab = button.dataset.tab;
             document.getElementById(targetTab).classList.add('active');
         });
     });
-
     if (tabButtons.length > 0) {
         tabButtons[0].click();
     }
@@ -311,6 +286,33 @@ function initializeSiteLogic() {
         adminLoginBtn.addEventListener('click', (e) => {
             e.preventDefault();
             showSection('controle-login');
+        });
+    }
+
+    // ✅ NOVO CÓDIGO ADICIONADO AQUI
+    // Lógica para o formulário de contato via WhatsApp
+    const formContato = document.getElementById('formContato');
+    if (formContato) {
+        formContato.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Captura os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const assunto = document.getElementById('assunto').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const numeroWhatsApp = '5548992183310'; // Seu número de WhatsApp
+
+            // Monta a mensagem com os dados do formulário
+            const mensagemTemplate = `Olá! me chamo *${nome}*!\n\nGostaria de falar sobre: *${assunto}*.\n\n${mensagem}`;
+
+            // Codifica a mensagem para ser usada em uma URL
+            const mensagemCodificada = encodeURIComponent(mensagemTemplate);
+
+            // Cria o link final para o WhatsApp
+            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+
+            // Abre o link em uma nova aba
+            window.open(linkWhatsApp, '_blank');
         });
     }
 }
@@ -354,4 +356,3 @@ async function excluirAluno(id) {
         console.error("Erro ao excluir aluno:", e);
     }
 }
-
