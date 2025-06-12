@@ -315,6 +315,27 @@ function initializeSiteLogic() {
             window.open(linkWhatsApp, '_blank');
         });
     }
+
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Verifica se o item que foi clicado já estava ativo
+            const isAlreadyActive = item.classList.contains('faq-item-active');
+
+            // Primeiro, remove a classe 'ativa' de todos os outros itens
+            // Isso garante que apenas uma resposta fique aberta por vez.
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('faq-item-active');
+            });
+
+            // Se o item clicado NÃO estava ativo, nós o ativamos.
+            // Se ele já estava ativo, o passo anterior já o desativou (efeito de fechar).
+            if (!isAlreadyActive) {
+                item.classList.add('faq-item-active');
+            }
+        });
+    });
 }
 
 // 🔹 Funções para manipular alunos no Firebase Firestore (sem alterações)
