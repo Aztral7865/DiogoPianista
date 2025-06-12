@@ -106,6 +106,8 @@ function setupNavigation() {
             if (link.id === 'logoutBtn') return; // Deixa o logout fazer sua função padrão
             
             e.preventDefault();
+
+            document.querySelectorAll('.modal-container.active').forEach(modal => modal.classList.remove('active'));
             const href = link.getAttribute('href');
             if (href === '#') return;
             showSection(href.substring(1));
