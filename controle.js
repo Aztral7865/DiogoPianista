@@ -128,14 +128,6 @@ function showSection(sectionId) {
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.toggle('active', section.id === sectionId);
     });
-    // Atualiza o botão hamburger para corresponder à seção ativa
-    document.querySelectorAll('.main-header .mobile-menu-toggle-btn').forEach(btn => {
-        btn.style.display = 'none';
-    });
-    const activeHeaderBtn = document.querySelector(`.content-section.active .main-header .mobile-menu-toggle-btn`);
-    if(activeHeaderBtn) {
-        activeHeaderBtn.style.display = 'block';
-    }
 
     if (sectionId === 'agendar-section' && calendario) {
         setTimeout(() => calendario.updateSize(), 10);
