@@ -1477,3 +1477,23 @@ tbody tr:last-child td {
         width: 100%;
     }
 }
+
+/* ===== ESTILOS PARA O FAQ INTERATIVO ===== */
+
+/* Adiciona transição suave de cor de fundo e texto aos itens */
+.faq-item, .faq-item h4, .faq-item p {
+    transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Define o novo visual para o item quando ele estiver ativo */
+.faq-item.faq-item-active {
+    background-color: var(--cor-acento-primario); /* Usa a cor escura do título como fundo */
+    border-color: var(--cor-acento-primario);     /* Deixa a borda da mesma cor */
+    transform: translateY(0); /* Anula o efeito de levantar do hover para um visual mais estável */
+}
+
+/* Muda a cor dos textos (título e parágrafo) dentro do item ativo para branco */
+.faq-item.faq-item-active h4,
+.faq-item.faq-item-active p {
+    color: var(--cor-branco);
+}
