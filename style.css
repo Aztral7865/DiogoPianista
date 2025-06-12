@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 14px;
+    /* O padrão é 16px. Reduzir este valor diminui tudo. */
+}
+
 :root {
     --cor-fundo-principal: #FFFFFF;
     --cor-texto-principal: #212529;
@@ -211,19 +216,21 @@ h3 {
 }
 
 .sobre-mim-texto {
-    flex: 0 1 50%;
+    flex-basis: calc(55% - 40px);
+    min-width: 300px;
+    margin-right: 40px;
+}
+
+.sobre-mim-imagem {
+    flex-basis: 45%;
     min-width: 300px;
 }
+
 
 .sobre-mim-texto p {
     font-size: 1.05em;
     color: var(--cor-texto-secundario);
     margin-bottom: 25px;
-}
-
-.sobre-mim-imagem {
-    flex: 0 1 45%; 
-    min-width: 300px;
 }
 
 .sobre-mim-imagem img {
@@ -293,20 +300,6 @@ h3 {
     gap: 10px;
 }
 
-/* Efeito 3D para os cards de serviço */
-.servicos-content {
-    perspective: 1000px;
-}
-
-.tab-content {
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-}
-
-.tab-content:hover {
-    transform: translateZ(50px);
-    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
-}
-
 .tab-button {
     padding: 10px 25px;
     font-size: 1em;
@@ -333,6 +326,10 @@ h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.servicos-content {
+    perspective: 1000px;
+}
+
 .tab-content {
     display: none;
     padding: 25px;
@@ -340,7 +337,14 @@ h3 {
     border-radius: var(--border-radius-padrao);
     box-shadow: var(--sombra-padrao);
     animation: fadeInSection 0.5s ease-out;
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
 }
+
+.tab-content:hover {
+    transform: translateZ(50px);
+    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
+}
+
 
 .tab-content.active {
     display: block;
@@ -453,11 +457,11 @@ a.contato-item {
     min-height: 220px;
 }
 
-/* Garante que o texto dentro dos cards de contato seja branco */
 a.contato-item h4,
 a.contato-item p {
     color: var(--cor-branco);
 }
+
 
 a.contato-item:hover {
     transform: translateY(-5px);
@@ -474,18 +478,6 @@ a.contato-item:hover {
     height: 48px;
     fill: var(--cor-branco);
     transition: fill 0.3s ease;
-}
-
-a.contato-item h4 {
-    font-size: 1.3em;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-a.contato-item p {
-    font-weight: 500;
-    font-size: 0.95em;
-    line-height: 1.4;
 }
 
 a.contato-item.telefone-item:hover {
@@ -663,12 +655,10 @@ footer {
     opacity: 1;
 }
 
-/* Contêiner principal da seção de login */
 #controle-login.content-section {
     padding: 0;
 }
 
-/* Fundo escuro que preenche a tela inteira */
 .login-container-dark {
     display: flex;
     align-items: center;
@@ -678,7 +668,6 @@ footer {
     font-family: 'Poppins', sans-serif;
 }
 
-/* A caixa/card central do formulário */
 .login-box {
     background-color: #131313;
     padding: 40px 50px;
@@ -690,7 +679,6 @@ footer {
     border: 1px solid #333;
 }
 
-/* Estilos para os textos dentro da caixa de login */
 .login-box h2 {
     color: #ffffff;
     font-family: 'Lora', serif;
@@ -704,7 +692,6 @@ footer {
     font-size: 0.95em;
 }
 
-/* Estilos específicos para os grupos de formulário DENTRO do login-box */
 .login-box .form-group {
     margin-bottom: 25px;
     text-align: left;
@@ -736,7 +723,6 @@ footer {
     box-shadow: 0 0 0 3px rgba(86, 0, 126, 0.2);
 }
 
-/* Estilo do botão de entrar */
 .btn-login {
     width: 100%;
     padding: 15px;
@@ -755,15 +741,12 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Mensagem de erro (inicialmente escondida) */
 .login-error-message {
     color: #ff4d4d !important;
     font-size: 0.9em;
     margin-top: 20px;
     display: none;
 }
-
-
 
 .footer-admin-link {
     margin-top: 10px;
@@ -800,7 +783,6 @@ footer {
     position: relative;
 }
 
-/* ✅ ESTILOS DO SIDEBAR ATUALIZADOS ✅ */
 .dashboard-container .sidebar {
     width: 260px;
     background-color: #1B1B29;
@@ -809,12 +791,12 @@ footer {
     flex-direction: column;
     flex-shrink: 0;
     transition: transform 0.3s ease-in-out;
-    z-index: 1300; /* Aumentado para ficar sobre o hamburger */
-    overflow-y: auto; /* Adicionado para permitir rolagem vertical */
+    z-index: 1300;
+    overflow-y: auto;
 }
 
 .dashboard-container .sidebar-header {
-    position: relative; /* Necessário para o posicionamento do botão 'X' */
+    position: relative;
     margin-bottom: 3rem;
 }
 
@@ -901,9 +883,9 @@ footer {
 }
 
 .dashboard-container .main-header {
-    display: flex; 
-    align-items: center; 
-    gap: 1rem; 
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .dashboard-container .main-header h1 {
@@ -993,7 +975,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -1028,13 +1010,13 @@ footer {
     background-color: #1B1B29;
     border-radius: 12px;
     padding: 1rem;
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; 
+    min-width: 600px;
 }
 
 th,
@@ -1043,7 +1025,7 @@ td {
     text-align: left;
     border-bottom: 1px solid #2d2d3f;
     vertical-align: middle;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 thead th {
@@ -1109,6 +1091,12 @@ tbody tr:last-child td {
     color: #F3C14C;
 }
 
+.tag.tag-pagamento-atrasado {
+    background-color: #f941444a;
+    color: #f94144;
+}
+
+
 .acoes-botoes button {
     background: none;
     border: none;
@@ -1153,13 +1141,13 @@ tbody tr:last-child td {
     z-index: 1000;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow-y: auto; 
-    padding: 5vh 0; 
+    overflow-y: auto;
+    padding: 5vh 0;
 }
 
 .modal-container.active {
@@ -1177,7 +1165,9 @@ tbody tr:last-child td {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transform: scale(0.9);
     transition: transform 0.3s ease;
-    position: relative; 
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .modal-container.active .modal-content {
@@ -1212,12 +1202,12 @@ tbody tr:last-child td {
 .form-row {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .form-row .form-group {
     flex: 1;
-    min-width: 150px; 
+    min-width: 150px;
 }
 
 .form-group {
@@ -1233,7 +1223,7 @@ tbody tr:last-child td {
 
 .form-group input,
 .form-group select,
-.form-group textarea { 
+.form-group textarea {
     width: 100%;
     background-color: #121212;
     border: 1px solid #2d2d3f;
@@ -1256,11 +1246,11 @@ tbody tr:last-child td {
     padding: 1.5rem;
     border-radius: 8px;
     margin-top: 1rem;
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 #calendario {
-    min-width: 500px; 
+    min-width: 500px;
 }
 
 
@@ -1270,7 +1260,7 @@ tbody tr:last-child td {
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 
@@ -1286,7 +1276,7 @@ tbody tr:last-child td {
 }
 
 .mobile-menu-toggle-btn {
-    display: none; 
+    display: none;
     background: none;
     border: none;
     color: #A2A3B9;
@@ -1295,9 +1285,8 @@ tbody tr:last-child td {
     z-index: 1200;
 }
 
-/* ✅ ESTILOS PARA O BOTÃO DE FECHAR ✅ */
 .close-sidebar-btn {
-    display: none; /* Escondido por padrão */
+    display: none;
     position: absolute;
     top: 10px;
     right: 15px;
@@ -1314,16 +1303,7 @@ tbody tr:last-child td {
     color: #FFFFFF;
 }
 
-
-/* ======================================================= */
-/* === INÍCIO DAS REGRAS DE RESPONSIVIDADE (MEDIA QUERIES) === */
-/* ======================================================= */
-
 @media (max-width: 768px) {
-    body {
-        font-size: 95%;
-    }
-
     #site-content-wrapper {
         padding-top: 135px;
     }
@@ -1350,13 +1330,13 @@ tbody tr:last-child td {
 
     #parallax-banner {
         min-height: 40vh;
-        background-attachment: scroll; 
+        background-attachment: scroll;
     }
 
     h2 {
         font-size: 2em;
     }
-    
+
     .section-padding {
         padding: 60px 0;
     }
@@ -1376,10 +1356,7 @@ tbody tr:last-child td {
     .sobre-mim-imagem {
         flex-basis: 100%;
         width: 100%;
-    }
-
-    .sobre-mim-botoes {
-        justify-content: center;
+        margin-right: 0;
     }
 
     .servico-item-layout {
@@ -1401,12 +1378,13 @@ tbody tr:last-child td {
     .servico-cta {
         align-self: center;
     }
-    
+
     .contato-info {
         grid-template-columns: 1fr;
     }
 
-    .formulario-contato-container, .faq-container {
+    .formulario-contato-container,
+    .faq-container {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -1421,7 +1399,7 @@ tbody tr:last-child td {
     }
 
     .mobile-menu-toggle-btn {
-        display: block; 
+        display: block;
     }
 
     .dashboard-container {
@@ -1433,46 +1411,45 @@ tbody tr:last-child td {
         left: 0;
         top: 0;
         height: 100%;
-        transform: translateX(-100%); 
+        transform: translateX(-100%);
     }
 
     .dashboard-container .sidebar.active {
-        transform: translateX(0); 
+        transform: translateX(0);
     }
-    
-    /* ✅ MOSTRA O BOTÃO 'X' QUANDO O MENU ESTIVER ATIVO ✅ */
+
     .dashboard-container .sidebar.active .close-sidebar-btn {
         display: block;
     }
 
     .dashboard-container .main-content {
         padding: 1.5rem;
-        margin-left: 0; 
+        margin-left: 0;
     }
 
     .dashboard-container .main-header h1 {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .active-students-section .section-header h2 {
         font-size: 1.2rem;
     }
-    
+
     .form-row {
         flex-direction: column;
         gap: 0;
     }
-    
-    .fc .fc-toolbar .fc-left, 
-    .fc .fc-toolbar .fc-center, 
+
+    .fc .fc-toolbar .fc-left,
+    .fc .fc-toolbar .fc-center,
     .fc .fc-toolbar .fc-right {
         width: 100%;
         display: flex;
         justify-content: center;
         margin-bottom: 0.5rem;
     }
-    
+
     .fc .fc-toolbar-title {
         font-size: 1.1rem;
     }
@@ -1480,21 +1457,22 @@ tbody tr:last-child td {
 
 @media (max-width: 480px) {
     #site-content-wrapper {
-        padding-top: 145px; 
+        padding-top: 145px;
     }
+
     .stats-cards {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
-    
+
     .modal-content {
         padding: 20px 15px;
     }
-    
+
     .modal-footer {
         flex-direction: column;
         gap: 0.8rem;
     }
-    
+
     .modal-footer .btn {
         width: 100%;
     }
